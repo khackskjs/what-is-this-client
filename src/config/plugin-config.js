@@ -12,11 +12,22 @@ Vue.use(IconsPlugin)
 
 
 /*** Vue Material ***/
-import { MdButton, MdContent, MdTabs, MdField } from 'vue-material/dist/components'
+/**
+ * Alignments 등 https://www.creative-tim.com/vuematerial/ui-elements/layout
+ */
+import {
+  MdButton,
+  MdContent,
+  MdField,
+  MdIcon,
+} from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
-import 'vue-material/dist/theme/default.css'
+// import 'vue-material/dist/theme/black-green-dark.css'
+import 'vue-material/dist/theme/black-green-light.css'
+// import 'vue-material/dist/theme/default.css'
+// import 'vue-material/dist/theme/default-dark.css'
 
 Vue.use(MdButton)
 Vue.use(MdContent)
-Vue.use(MdTabs)
 Vue.use(MdField)
+Vue.use(MdIcon)

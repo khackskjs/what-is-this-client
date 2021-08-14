@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <md-content>
     <card-group-forms />
-  </div>
+  </md-content>
 </template>
 
 <script>
