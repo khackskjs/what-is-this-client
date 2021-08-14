@@ -1,7 +1,8 @@
 // eslint-disable-next-line prettier/prettier
-import Vue from "vue"
+import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import CardManagement from '@/views/CardManagement.vue'
 
 Vue.use(VueRouter)
 
@@ -20,6 +21,11 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
+  {
+    path: '/card-management',
+    name: 'card-management',
+    component: CardManagement,
+  }
 ]
 
 const router = new VueRouter({

@@ -7,7 +7,7 @@
       <router-link to="/about">
         About
       </router-link>
-      <router-link to="/card-group">
+      <router-link to="/card-management">
         CardGroup
       </router-link>
     </div>
