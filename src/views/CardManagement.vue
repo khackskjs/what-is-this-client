@@ -1,19 +1,19 @@
 <template>
-  <md-content>
-    <card-group-forms />
-  </md-content>
+  <div>
+    <router-view />
+  </div>
 </template>
 
 <script>
-import CardGroupForms from '@/components/forms/CardGroupForms'
+// import CardGroupForms from '@/components/forms/CardGroupForms'
 export default {
   name: 'CardManagement',
   components: {
-    CardGroupForms,
+    // CardGroupForms,
   },
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
 
 </style>

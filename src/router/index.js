@@ -2,7 +2,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import CardManagement from '@/views/CardManagement.vue'
+import CardManagement from '../views/CardManagement.vue'
+import CardListPage from '../views/CardListPage.vue'
+import CardGroupForm from '../components/forms/CardGroupForms.vue'
 
 Vue.use(VueRouter)
 
@@ -23,9 +25,20 @@ const routes = [
   },
   {
     path: '/card-management',
-    name: 'card-management',
     component: CardManagement,
-  }
+    children: [
+      {
+        path: '/',
+        name: 'card-list',
+        component: CardListPage,
+      },
+      {
+        path: '/edit',
+        component: CardGroupForm,
+      },
+    ]
+  },
+
 ]
 
 const router = new VueRouter({
