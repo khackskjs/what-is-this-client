@@ -1,8 +1,18 @@
 <template>
   <div id="app">
+    <navigation-fabs />
     <router-view />
   </div>
 </template>
+
+<script>
+import NavigationFabs from '@/views/NavigationFabs'
+export default {
+  components: {
+    NavigationFabs,
+  },
+}
+</script>
 
 <style lang="scss">
 #app {
