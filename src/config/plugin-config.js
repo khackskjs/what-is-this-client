@@ -20,6 +20,9 @@ import {
   MdContent,
   MdField,
   MdIcon,
+  MdList,
+  MdDivider,
+  MdAvatar,
 } from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
 // import 'vue-material/dist/theme/black-green-dark.css'
@@ -31,3 +34,6 @@ Vue.use(MdButton)
 Vue.use(MdContent)
 Vue.use(MdField)
 Vue.use(MdIcon)
+Vue.use(MdList)
+Vue.use(MdDivider)
+Vue.use(MdAvatar)
