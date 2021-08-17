@@ -1,16 +1,16 @@
 <template>
   <div>
-    <card-list />
+    <card-list-container />
   </div>
 </template>
 
 <script>
-import CardList from '@/components/cards/CardList'
+import CardListContainer from '@/components/containers/CardListContainer'
 
 export default {
   name: 'CardListPage',
   components: {
-    CardList
+    CardListContainer,
   },
 }
 </script>
