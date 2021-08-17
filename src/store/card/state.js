@@ -1,4 +1,4 @@
 export default () => ({
   cardGroupList: [],
-  cardList: [],
+  cardListMap: {},    // key: guid
 })
