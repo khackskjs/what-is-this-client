@@ -13,6 +13,7 @@
       <md-list-item
         v-for="group of list"
         :key="group.guid"
+        @click="onGroupClick(group)"
       >
         <md-icon>move_to_inbox</md-icon>
         <span class="md-list-item-text">{{ group.name }}</span>
@@ -29,6 +30,10 @@ export default {
   },
   mounted() {
     console.log('m', this.$props)
+  },
+  methods: {
+    onGroupClick(group) {
+    }
   },
 }
 </script>

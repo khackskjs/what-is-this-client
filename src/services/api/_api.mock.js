@@ -21,7 +21,7 @@ const mock = {
   ],
 }
 function createCardGroup(guid, name) {
-  return { name, }
+  return { guid, name }
 }
 function createCard(guid, cuid, text1, text2) {
   return { guid, cuid, text1, text2, }
