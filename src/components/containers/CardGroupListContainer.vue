@@ -1,20 +1,33 @@
 <template>
-  <card-list />
+  <card-group-list
+    :list="cardGroupList"
+  />
 </template>
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-import CardList from '@/components/cards/CardList'
+import CardGroupList from '@/components/cards/CardGroupList'
 
 const cardModule = createNamespacedHelpers('card')
 
 export default {
   name: 'CardListContainer',
   components: {
-    CardList,
+    CardGroupList,
+  },
+  props: {
+    
+  },
+  data() {
+    return {
+      // cardGroupList: [],
+    }
   },
   computed: {
-    
+    ...cardModule.mapGetters(['groupList']),
+    cardGroupList() {
+      return this.groupList
+    },
   },
   mounted() {
     this.init()
