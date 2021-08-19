@@ -1,13 +1,4 @@
 <template>
-  <!-- <div>
-    CardList
-    <md-list>
-      <md-list-item>
-        <md-icon>move_to_inbox</md-icon>
-        <span class="md-list-item-text">Inbox</span>
-      </md-list-item>
-    </md-list>
-  </div> -->
   <div>
     <md-list>
       <md-list-item
