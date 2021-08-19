@@ -24,6 +24,7 @@ export default {
   },
   methods: {
     onGroupClick(group) {
+      this.$emit('select:cardGroup', { guid: group.guid })
     }
   },
 }

@@ -1,11 +1,12 @@
 <template>
   <card-group-list
     :list="cardGroupList"
+    @select:cardGroup="onSelectCardGroup"
   />
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
+import { createNamespacedHelpers, mapActions } from 'vuex'
 import CardGroupList from '@/components/cards/CardGroupList'
 
 const cardModule = createNamespacedHelpers('card')
@@ -34,9 +35,13 @@ export default {
   },
   methods: {
     ...cardModule.mapActions(['getCardGroupList', 'getCardList']),
+    ...mapActions(['selectCardGroupUuid']),
     async init() {
       await this.getCardGroupList()
-    }
+    },
+    async onSelectCardGroup({ guid }) {
+      await this.selectCardGroupUuid(guid)
+    },
   },
 }
 </script>
