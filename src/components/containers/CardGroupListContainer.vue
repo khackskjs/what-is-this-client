@@ -46,6 +46,7 @@ export default {
       // 순서 중요. 카드 리스트를 가져온 후 root state 변경 해야 함
       await this.getCardList(guid)
       await this.selectCardGroupUuid(guid)
+      this.$emit('select', guid)
     },
   },
 }

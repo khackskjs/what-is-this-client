@@ -9,8 +9,8 @@
       </div>
       <div class="md-layout">
         <md-field>
-          <label>Base Day</label>
-          <md-input v-model="model.groupName" />
+          <label>Base Date</label>
+          <md-input v-model="model.baseDate" />
         </md-field>
       </div>
       
@@ -31,7 +31,7 @@
           <md-field :class="messageClass">
             <label>Front text (Korean)</label>
             <md-textarea
-              v-model="cardText.front"
+              v-model="cardText.text1"
               class="te"
               :required="true"
               :md-counter="values.limit.textareaCount"
@@ -41,9 +41,9 @@
         </div>
         <div class="md-layout-item md-small-size-100">
           <md-field :class="messageClass">
-            <label>Front text (Korean)</label>
+            <label>Real text (English)</label>
             <md-textarea
-              v-model="cardText.real"
+              v-model="cardText.text2"
               :required="true"
               :md-counter="values.limit.textareaCount"
               :maxlength="values.limit.textareaCount"
@@ -59,14 +59,17 @@
 export default {
   name: 'CardGroupForms',
   props: {
+    guid: { type: String, default: '' },
     groupName: { type: String, default: '' },
+    baseDate: { type: Number, default: 1 },
     cardTextList: { type: Array, default: () => [] },
   },
   data() {
     return {
       model: {
-        cardTextList: this.cardTextList,
         groupName: this.groupName,
+        baseDate: this.baseDate,
+        cardTextList: this.cardTextList,
         isInvalid: true,
       },
       values: {
@@ -83,7 +86,7 @@ export default {
   },
   methods: {
     createCardText() {
-      return { front: '', real: '' }
+      return { text1: '', text2: '' }
     },
     addCard() {
       this.model.cardTextList.splice(0, 0, this.createCardText())
