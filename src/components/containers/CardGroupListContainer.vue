@@ -1,12 +1,20 @@
 <template>
-  <card-group-list
-    :list="cardGroupList"
-    @select:cardGroup="onSelectCardGroup"
-  />
+  <div>
+    <card-group-list
+      :list="cardGroupList"
+      @select:cardGroup="onSelectCardGroup"
+    />
+    <div
+      v-for="(card) of selectedCardList"
+      :key="card.cuid"
+    >
+      {{ card }}
+    </div>
+  </div>
 </template>
 
 <script>
-import { createNamespacedHelpers, mapActions } from 'vuex'
+import { createNamespacedHelpers, mapActions, mapGetters } from 'vuex'
 import CardGroupList from '@/components/cards/CardGroupList'
 
 const cardModule = createNamespacedHelpers('card')
@@ -26,6 +34,7 @@ export default {
   },
   computed: {
     ...cardModule.mapGetters(['groupList']),
+    ...mapGetters(['selectedCardGroupUuid', 'selectedCardList']),
     cardGroupList() {
       return this.groupList
     },
@@ -40,6 +49,8 @@ export default {
       await this.getCardGroupList()
     },
     async onSelectCardGroup({ guid }) {
+      // 순서 중요. 카드 리스트를 가져온 후 root state 변경 해야 함
+      await this.getCardList(guid)
       await this.selectCardGroupUuid(guid)
     },
   },

@@ -12,7 +12,7 @@ export default {
   async getCardList({ commit }, guid) {
     const response = await apiService.getCardList({ guid })
     if (response.status === 200) {
-      commit('SET_CARD_LIST', response.data)
+      commit('SET_CARD_LIST', { guid, cardList: response.data })
     }
   },
 }
