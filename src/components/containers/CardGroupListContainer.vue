@@ -4,12 +4,6 @@
       :list="cardGroupList"
       @select:cardGroup="onSelectCardGroup"
     />
-    <div
-      v-for="(card) of selectedCardList"
-      :key="card.cuid"
-    >
-      {{ card }}
-    </div>
   </div>
 </template>
 
@@ -34,7 +28,7 @@ export default {
   },
   computed: {
     ...cardModule.mapGetters(['groupList']),
-    ...mapGetters(['selectedCardGroupUuid', 'selectedCardList']),
+    ...mapGetters(['selectedCardGroupUuid']),
     cardGroupList() {
       return this.groupList
     },
