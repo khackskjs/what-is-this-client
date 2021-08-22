@@ -7,6 +7,7 @@ import actions from './actions'
 import getters from './getters'
 
 import card from './card'
+import user from './user'
 
 Vue.use(Vuex)
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
   actions,
   getters,
   modules: {
-    card
+    card,
+    user,
   },
 })
