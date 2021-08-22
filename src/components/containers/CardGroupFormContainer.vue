@@ -51,13 +51,19 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['selectedCardList']),
+    ...mapGetters(['selectedCardGroup', 'selectedCardList']),
   },
   watch: {
     selectedCardList: {
       immediate: false,
       handler(val) {
         this.model.cardList = val
+      },
+    },
+    selectedCardGroup: {
+      immediate: false,
+      handler(val) {
+        this.model.cardGroup = val
       },
     },
   },
