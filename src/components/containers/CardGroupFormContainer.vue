@@ -55,13 +55,13 @@ export default {
   },
   watch: {
     selectedCardList: {
-      immediate: false,
+      immediate: true,
       handler(val) {
         this.model.cardList = val
       },
     },
     selectedCardGroup: {
-      immediate: false,
+      immediate: true,
       handler(val) {
         this.model.cardGroup = val
       },
