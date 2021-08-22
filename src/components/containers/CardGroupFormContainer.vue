@@ -2,7 +2,7 @@
   <div>
     <md-dialog :md-active.sync="showDialog">
       <card-group-forms
-        class="forms"
+        class="card-group-forms"
         :guid="model.cardGroup.guid"
         :group-name="model.cardGroup.name"
         :base-date="1"
@@ -20,7 +20,7 @@
           class="md-primary"
           @click="showDialog = false"
         >
-          Save
+          {{ confirmText }}
         </md-button>
       </md-dialog-actions>
     </md-dialog>
@@ -47,28 +47,24 @@ export default {
         },
         cardList: [],
       },
+      mode: 'create',
       showDialog: false
     }
   },
   computed: {
     ...mapGetters(['selectedCardGroup', 'selectedCardList']),
-  },
-  watch: {
-    selectedCardList: {
-      immediate: true,
-      handler(val) {
-        this.model.cardList = val
-      },
+    isCreateMode() {
+      return this.mode === 'create'
     },
-    selectedCardGroup: {
-      immediate: true,
-      handler(val) {
-        this.model.cardGroup = val
-      },
+    confirmText() {
+      return this.isCreateMode ? 'CREATE' : 'UPDATE'
     },
   },
   methods: {
-    show() {
+    show({ mode } = {}) {
+      this.mode = mode ? mode : 'create'
+      this.model.cardList = this.isCreateMode ? [] : this.selectedCardList
+      this.model.cardGroup = this.isCreateMode ? {} : this.selectedCardGroup
       this.showDialog = true
     },
     hide() {
@@ -82,8 +78,7 @@ export default {
 .md-dialog ::v-deep.md-dialog-container {
   max-width: 768px;
 }
-.forms {
-  // height: 100%;
+.card-group-forms {
   overflow-y: auto;
 }
 </style>

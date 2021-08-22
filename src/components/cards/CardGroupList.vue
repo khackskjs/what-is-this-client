@@ -6,7 +6,7 @@
         :key="group.guid"
         @click="onGroupClick(group)"
       >
-        <md-icon>move_to_inbox</md-icon>
+        <md-icon>article</md-icon>
         <span class="md-list-item-text">{{ group.name }}</span>
       </md-list-item>
     </md-list>
@@ -18,9 +18,6 @@ export default {
   name: 'CardGroupList',
   props: {
     list: { type: Array, default: () => [], required: true },
-  },
-  mounted() {
-    console.log('m', this.$props)
   },
   methods: {
     onGroupClick(group) {
