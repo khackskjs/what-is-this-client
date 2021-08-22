@@ -5,7 +5,7 @@
         class="card-group-forms"
         :guid="model.cardGroup.guid"
         :group-name="model.cardGroup.name"
-        :base-date="1"
+        :base-date="studyDateCount"
         :card-text-list="model.cardList"
       />
 
@@ -30,6 +30,8 @@
 <script>
 import CardGroupForms from '@/components/forms/CardGroupForms'
 import { mapGetters } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const userModule = createNamespacedHelpers('user')
 
 export default {
   name: 'CardGroupFormContainer',
@@ -53,6 +55,7 @@ export default {
   },
   computed: {
     ...mapGetters(['selectedCardGroup', 'selectedCardList']),
+    ...userModule.mapGetters(['studyDateCount']),
     isCreateMode() {
       return this.mode === 'create'
     },
