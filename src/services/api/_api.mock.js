@@ -19,12 +19,20 @@ const mock = {
     createCard('cg4-uid', 'c32-uid', 'ipad', '아이패드'),
     createCard('cg4-uid', 'c33-uid', 'speaker', '스피커'),
   ],
+  userInfo: [
+    createUserInfo('uuid1', 'khackskjs', 'khackskjs', '마이쏠', 2),
+    createUserInfo('uuid2', 'ikostar', 'ikostar', '마이소르', 11),
+  ],
 }
+
 function createCardGroup(guid, name) {
   return { guid, name }
 }
 function createCard(guid, cuid, text1, text2) {
   return { guid, cuid, text1, text2, }
+}
+function createUserInfo(uuid, id, pw, nickname, studyDateCount) {
+  return {uuid, id, pw, nickname, studyDateCount }
 }
 
 function wrapServerResponse(args) {
@@ -37,5 +45,8 @@ export default {
   },
   async getCardList({ guid }) {
     return wrapServerResponse(mock.cardList.filter(c => c.guid === guid))
-  }
+  },
+  async getUserInfo({ id, pw }) {
+    return wrapServerResponse(mock.userInfo.find(u => u.id === id && u.pw === pw) || {})
+  },
 }
