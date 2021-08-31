@@ -1,4 +1,6 @@
 {
+  "card_group_form__card_add_button_title": "카드 추가",
+  "card_group_form__card_delete_button_title": "카드 삭제",
   "card_group_form_close_button_title": "닫기",
   "card_group_form_create_button_title": "생성",
   "card_group_form_update_button_title": "저장",

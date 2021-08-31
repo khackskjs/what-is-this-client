@@ -19,8 +19,14 @@
           class="md-raised md-primary"
           @click="addCard"
         >
-          카드 추가
+          {{ $t('card_group_form__card_add_button_title') }}
         </md-button>
+        <!-- <md-button
+          class="md-raised md-primary"
+          @click="deleteCard"
+        >
+          {{ $t('card_group_form__card_delete_button_title') }}
+        </md-button> -->
       </div>
       <div
         v-for="(cardText, index) of model.cardTextList"
@@ -91,6 +97,8 @@ export default {
     addCard() {
       this.model.cardTextList.splice(0, 0, this.createCardText())
     },
+    deleteCard() {
+    }
   },
 }
 </script>
