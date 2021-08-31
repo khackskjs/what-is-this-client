@@ -9,7 +9,7 @@
       </div>
       <div class="md-layout">
         <md-field>
-          <label>{{ $t('card_group_from_study_date_count_title') }}</label>
+          <label>{{ $t('card_group_form_study_date_count_title') }}</label>
           <md-input v-model="model.baseDate" />
         </md-field>
       </div>

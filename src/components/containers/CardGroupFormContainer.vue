@@ -14,7 +14,7 @@
           class="md-primary"
           @click="showDialog = false"
         >
-          Close
+          {{ $t('card_group_form_close_button_title') }}
         </md-button>
         <md-button
           class="md-primary"
@@ -60,7 +60,7 @@ export default {
       return this.mode === 'create'
     },
     confirmText() {
-      return this.isCreateMode ? 'CREATE' : 'UPDATE'
+      return this.isCreateMode ? this.$t('card_group_form_create_button_title') : this.$t('card_group_form_update_button_title')
     },
   },
   methods: {
