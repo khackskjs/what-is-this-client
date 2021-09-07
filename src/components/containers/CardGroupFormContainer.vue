@@ -4,7 +4,7 @@
       <card-group-forms
         class="card-group-forms"
         :guid="model.cardGroup.guid"
-        :group-name="model.cardGroup.name"
+        :group-name.sync="model.cardGroup.name"
         :base-date="studyDateCount"
         :card-text-list="model.cardList"
       />
@@ -17,8 +17,8 @@
           {{ $t('card_group_form_close_button_title') }}
         </md-button>
         <md-button
-          class="md-primary"
-          @click="showDialog = false"
+          class="md-raised md-primary"
+          @click="save(isCreateMode)"
         >
           {{ confirmText }}
         </md-button>
@@ -32,6 +32,7 @@ import CardGroupForms from '@/components/forms/CardGroupForms'
 import { mapGetters } from 'vuex'
 import { createNamespacedHelpers } from 'vuex'
 const userModule = createNamespacedHelpers('user')
+const cardModule = createNamespacedHelpers('card')
 
 export default {
   name: 'CardGroupFormContainer',
@@ -64,6 +65,7 @@ export default {
     },
   },
   methods: {
+    ...cardModule.mapActions(['saveCardGroup']),
     show({ mode } = {}) {
       this.mode = mode ? mode : 'create'
       this.model.cardList = this.isCreateMode ? [] : this.selectedCardList
@@ -71,6 +73,13 @@ export default {
       this.showDialog = true
     },
     hide() {
+      this.showDialog = false
+    },
+    async save(isCreateMode) {
+      const cardGroup = await this.saveCardGroup(this.model.cardGroup)
+      if (isCreateMode) {
+        console.log(cardGroup)
+      }
       this.showDialog = false
     },
   },

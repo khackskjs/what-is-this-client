@@ -4,7 +4,10 @@
       <div class="md-layout">
         <md-field>
           <label>Group Name</label>
-          <md-input v-model="model.groupName" />
+          <md-input
+            v-model="model.groupName"
+            @input="$emit('update:group-name', $event)"
+          />
         </md-field>
       </div>
       <div class="md-layout">
