@@ -18,7 +18,10 @@ class ApiService {
     return response
   }
 
-  getCardList() {
+  async getCardList(guid) {
+    const params = { guid }
+    const response = await http.get('/card/list', { params })
+    return response
   }
 
   getCardGroup(guid) {

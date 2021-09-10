@@ -1,4 +1,4 @@
-import apiService from '@services/api/_api.mock'
+// import apiService from '@services/api/_api.mock'
 import apiServiceReal from '@services/api'
 
 export default {
@@ -22,7 +22,7 @@ export default {
     }
   },
   async getCardList({ commit }, guid) {
-    const response = await apiService.getCardList({ guid })
+    const response = await apiServiceReal.getCardList(guid)
     if (response.status === 200) {
       commit('SET_CARD_LIST', { guid, cardList: response.data })
     }

@@ -68,7 +68,7 @@
 export default {
   name: 'CardGroupForms',
   props: {
-    guid: { type: String, default: '' },
+    guid: { type: Number, default: 0 },
     groupName: { type: String, default: '' },
     baseDate: { type: Number, default: 1 },
     cardTextList: { type: Array, default: () => [] },
