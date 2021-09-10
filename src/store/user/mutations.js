@@ -5,4 +5,7 @@ export default {
   SET_NICKNAME(state, nickname) {
     state.nickname = nickname
   },
+  SET_UUID(state, uuid) {
+    state.uuid = uuid
+  },
 }
