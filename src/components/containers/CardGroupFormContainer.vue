@@ -12,13 +12,13 @@
       <md-dialog-actions>
         <md-button
           class="md-primary"
-          @click="showDialog = false"
+          @click="$emit('close', false); showDialog = false"
         >
           {{ $t('card_group_form_close_button_title') }}
         </md-button>
         <md-button
           class="md-raised md-primary"
-          @click="save(isCreateMode)"
+          @click="save()"
         >
           {{ confirmText }}
         </md-button>
@@ -76,20 +76,21 @@ export default {
     hide() {
       this.showDialog = false
     },
-    async save(isCreateMode) {
+    async save() {
       const cardGroup = await this.saveCardGroup(this.model.cardGroup)
+      
       if (!cardGroup.guid) {
         return console.error('no guid created')
       }
 
-      const cardList = this.model.cardList.map(card => Card.parse(card))
-      cardList.forEach(c => { c.guid = cardGroup.guid; c.dateForNextReview = this.studyDateCount })
-
-      await this.saveCardList(cardList)
-      
-      if (isCreateMode) {
-        console.log(cardGroup)
+      if (this.model.cardList) {
+        const cardList = this.model.cardList.map(card => Card.parse(card))
+        cardList.forEach(c => { c.guid = cardGroup.guid; c.dateForNextReview = this.studyDateCount })
+  
+        await this.saveCardList(cardList)
       }
+      
+      this.$emit('close', true)
       this.showDialog = false
     },
   },
