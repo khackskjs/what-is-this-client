@@ -5,7 +5,8 @@ module.exports = {
       'module-resolver',
       {
         'alias': {
-          '@services': './src/services'
+          '@services': './src/services',
+          '@store': './src/store',
         }
       }
     ]
