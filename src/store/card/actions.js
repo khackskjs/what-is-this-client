@@ -3,14 +3,20 @@ import apiServiceReal from '@services/api'
 
 export default {
   async saveCardGroup({  }, cardGroup) {
-    console.log('saveCardGroup', {...cardGroup})
     const response = await apiServiceReal.upsertCardGroup(cardGroup)
     if (response.status === 200) {
-      console.log('success', cardGroup)
+      return response.data
+    }
+  },
+  async saveCardList({}, cardList) {
+    console.log('cardList', cardList)
+    const response = await apiServiceReal.upsertCardList(cardList)
+    if (response.status === 200) {
+      return response.data
     }
   },
   async getCardGroupList({ commit }) {
-    const response = await apiService.getCardGroupList()
+    const response = await apiServiceReal.getCardGroupList()
     if (response.status === 200) {
       commit('SET_GROUP_LIST', response.data)
     }

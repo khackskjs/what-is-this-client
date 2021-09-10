@@ -12,6 +12,7 @@ import { createNamespacedHelpers, mapActions, mapGetters } from 'vuex'
 import CardGroupList from '@/components/cards/CardGroupList'
 
 const cardModule = createNamespacedHelpers('card')
+const userModule = createNamespacedHelpers('user')
 
 export default {
   name: 'CardListContainer',
@@ -28,6 +29,7 @@ export default {
   },
   computed: {
     ...cardModule.mapGetters(['groupList']),
+    ...userModule.mapGetters(['uuid']),
     ...mapGetters(['selectedCardGroupUuid']),
     cardGroupList() {
       return this.groupList

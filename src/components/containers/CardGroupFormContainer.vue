@@ -31,6 +31,7 @@
 import CardGroupForms from '@/components/forms/CardGroupForms'
 import { mapGetters } from 'vuex'
 import { createNamespacedHelpers } from 'vuex'
+import { Card } from '@store/models/card.model'
 const userModule = createNamespacedHelpers('user')
 const cardModule = createNamespacedHelpers('card')
 
@@ -65,7 +66,7 @@ export default {
     },
   },
   methods: {
-    ...cardModule.mapActions(['saveCardGroup']),
+    ...cardModule.mapActions(['saveCardGroup', 'saveCardList']),
     show({ mode } = {}) {
       this.mode = mode ? mode : 'create'
       this.model.cardList = this.isCreateMode ? [] : this.selectedCardList
@@ -77,6 +78,15 @@ export default {
     },
     async save(isCreateMode) {
       const cardGroup = await this.saveCardGroup(this.model.cardGroup)
+      if (!cardGroup.guid) {
+        return console.error('no guid created')
+      }
+
+      const cardList = this.model.cardList.map(card => Card.parse(card))
+      cardList.forEach(c => { c.guid = cardGroup.guid; c.dateForNextReview = this.studyDateCount })
+
+      await this.saveCardList(cardList)
+      
       if (isCreateMode) {
         console.log(cardGroup)
       }
