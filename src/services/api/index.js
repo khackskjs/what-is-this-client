@@ -24,10 +24,10 @@ class ApiService {
     return response
   }
 
-  getCardGroup(guid) {
-    guid
+  async deleteCardGroup(guid) {
+    const response = await http.delete('/card/group', { guid })
+    return response
   }
-
 }
 
 export default new ApiService()

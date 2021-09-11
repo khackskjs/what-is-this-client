@@ -27,4 +27,10 @@ export default {
       commit('SET_CARD_LIST', { guid, cardList: response.data })
     }
   },
+  async deleteCardGroup({ commit }, guid) {
+    const response = await apiServiceReal.deleteCardGroup(guid)
+    if (response.status === 200) {
+      commit('DELETE_CARD_GROUP', guid)
+    }
+  }
 }

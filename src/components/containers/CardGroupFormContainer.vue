@@ -11,14 +11,21 @@
 
       <md-dialog-actions>
         <md-button
+          v-if="!isCreateMode"
+          class="md-accent delete-button"
+          @click="deleteGroup"
+        >
+          {{ $t('card_group_form_delete_button_title') }}
+        </md-button>
+        <md-button
           class="md-primary"
-          @click="$emit('close', false); showDialog = false"
+          @click="$emit('close'); showDialog = false"
         >
           {{ $t('card_group_form_close_button_title') }}
         </md-button>
         <md-button
           class="md-raised md-primary"
-          @click="save()"
+          @click="save"
         >
           {{ confirmText }}
         </md-button>
@@ -66,7 +73,7 @@ export default {
     },
   },
   methods: {
-    ...cardModule.mapActions(['saveCardGroup', 'saveCardList']),
+    ...cardModule.mapActions(['saveCardGroup', 'saveCardList', 'deleteCardGroup']),
     show({ mode } = {}) {
       this.mode = mode ? mode : 'create'
       this.model.cardList = this.isCreateMode ? [] : this.selectedCardList
@@ -89,8 +96,13 @@ export default {
   
         await this.saveCardList(cardList)
       }
-      
-      this.$emit('close', true)
+
+      this.$emit('close', { reload: true })
+      this.showDialog = false
+    },
+    async deleteGroup() {
+      await this.deleteCardGroup(this.model.cardGroup.guid)
+      this.$emit('close')
       this.showDialog = false
     },
   },
@@ -103,5 +115,8 @@ export default {
 }
 .card-group-forms {
   overflow-y: auto;
+}
+.delete-button {
+  margin-right: auto !important;
 }
 </style>

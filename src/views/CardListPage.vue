@@ -34,20 +34,20 @@ export default {
   methods: {
     ...cardModule.mapGetters(['getCardGroupList']),
     onSelect() {
-      this.showCardGroupFormDialog('update')
+      this.showCardGroupFormDialog({ mode: 'update' })
     },
     addCardGroup() {
       this.showCardGroupFormDialog()
     },
-    showCardGroupFormDialog(mode) {
+    showCardGroupFormDialog({ mode } = {}) {
       const modal = this.$refs['cg-form-container']
       if (modal) {
         modal.show({ mode })
       }
     },
-    async onCardGroupFormClosed(saved) {
-      console.log('closed form', saved)
-      if (saved) {
+    async onCardGroupFormClosed({ reload }) {
+      console.log('closed form', { reload })
+      if (reload) {
         await this.getCardGroupList()
       }
     }
