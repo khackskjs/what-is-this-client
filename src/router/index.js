@@ -3,7 +3,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import CardManagement from '../views/CardManagement.vue'
-import CardListPage from '../views/CardListPage.vue'
+import CardGroupListPage from '../views/CardGroupListPage.vue'
 import CardGroupForm from '../components/forms/CardGroupForms.vue'
 
 Vue.use(VueRouter)
@@ -30,7 +30,7 @@ const routes = [
       {
         path: '/',
         name: 'card-list',
-        component: CardListPage,
+        component: CardGroupListPage,
       },
       {
         path: '/edit',

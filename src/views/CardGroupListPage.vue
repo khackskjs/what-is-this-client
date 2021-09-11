@@ -22,21 +22,23 @@
 import CardGroupListContainer from '@/components/containers/CardGroupListContainer'
 import CardGroupFormContainer from '@/components/containers/CardGroupFormContainer'
 
-import { createNamespacedHelpers } from 'vuex'
+import { createNamespacedHelpers, mapActions } from 'vuex'
 const cardModule = createNamespacedHelpers('card')
 
 export default {
-  name: 'CardListPage',
+  name: 'CardGroupListPage',
   components: {
     CardGroupListContainer,
     CardGroupFormContainer,
   },
   methods: {
-    ...cardModule.mapGetters(['getCardGroupList']),
+    ...cardModule.mapActions(['getCardGroupList']),
+    ...mapActions(['selectCardGroupUuid']),
     onSelect() {
       this.showCardGroupFormDialog({ mode: 'update' })
     },
     addCardGroup() {
+      this.selectCardGroupUuid(null)
       this.showCardGroupFormDialog()
     },
     showCardGroupFormDialog({ mode } = {}) {
@@ -45,7 +47,7 @@ export default {
         modal.show({ mode })
       }
     },
-    async onCardGroupFormClosed({ reload }) {
+    async onCardGroupFormClosed({ reload } = {}) {
       console.log('closed form', { reload })
       if (reload) {
         await this.getCardGroupList()

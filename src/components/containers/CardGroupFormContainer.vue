@@ -90,15 +90,15 @@ export default {
         return console.error('no guid created')
       }
 
-      if (this.model.cardList) {
+      if (this.model.cardList.length) {
         const cardList = this.model.cardList.map(card => Card.parse(card))
         cardList.forEach(c => { c.guid = cardGroup.guid; c.dateForNextReview = this.studyDateCount })
   
         await this.saveCardList(cardList)
       }
 
-      this.$emit('close', { reload: true })
       this.showDialog = false
+      this.$emit('close', { reload: true })
     },
     async deleteGroup() {
       await this.deleteCardGroup(this.model.cardGroup.guid)
