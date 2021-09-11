@@ -11,4 +11,14 @@ export default {
   post(url, data, config) {
     return instance.post(url, data, config)
   },
+  delete(url, data, config) {
+    if (!config) {
+      config = {}
+    }
+    if (data) {
+      config = { ...config, data }
+    }
+    
+    return instance.delete(url, config)
+  }
 }
