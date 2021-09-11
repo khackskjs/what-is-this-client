@@ -6,6 +6,20 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <script>
+      function init() {
+        gapi.load('auth2', () => {
+          gapi.auth2.init({ client_id: '818753275854-nqh30pkfpintb30d7c8srhgo04hp1ik1.apps.googleusercontent.com' })
+            .then(() => {
+              const event = new Event('google-oauth-library-load')
+              window.dispatchEvent(event)
+            })
+        })
+      }
+    </script>
+    <meta name="google-signin-client_id" content="818753275854-nqh30pkfpintb30d7c8srhgo04hp1ik1.apps.googleusercontent.com">
+
     <title><%= htmlWebpackPlugin.options.title %></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
