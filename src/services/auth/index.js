@@ -17,8 +17,16 @@ class AuthService {
     return !!user.google
   }
 
+  getUserIdToken() {
+    return user.google.getAuthResponse().id_token
+  }
+
   getUserEmail() {
-    return user.google.getEmail()
+    return user.google.getBasicProfile().getEmail()
+  }
+
+  getUserName() {
+    return user.google.getBasicProfile().getName()
   }
 
   static get instance() {
@@ -33,8 +41,8 @@ class AuthService {
     await authInstance.signOut()
   }
 
-  getUser() {
-    return user.google
+  getUserInfo() {
+    return { email: this.getUserEmail(), name: this.getUserName() }
   }
 }
 

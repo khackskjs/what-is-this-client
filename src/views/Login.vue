@@ -15,12 +15,17 @@ r<template>
 
 <script>
 import authService from '@services/auth'
+import { createNamespacedHelpers } from 'vuex'
+
+const userModule = createNamespacedHelpers('user')
 
 export default {
   mounted() {
+    console.log('mounted')
     window.addEventListener('google-oauth-library-load', this.renderSigninButton)
   },
   methods: {
+    ...userModule.mapActions(['loginUser']),
     renderSigninButton() {
       window.gapi.signin2.render('my-signin2', {
         scope: 'profile email',
@@ -35,11 +40,13 @@ export default {
       const authInstance = window.gapi.auth2.getAuthInstance()
       await authInstance.signOut()
     },
-    onSuccess(user) {
-      authService.setGoogleUser(user.getBasicProfile())
+    async onSuccess(user) {
+      authService.setGoogleUser(user)
+      this.loginUser(authService.getUserInfo())
       this.$router.push({ name: 'Home' })
     },
     onFailure(error) {
+      console.log('onFailure')
       console.error(error)
     },
   }

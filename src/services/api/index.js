@@ -28,6 +28,11 @@ class ApiService {
     const response = await http.delete('/card/group', { guid })
     return response
   }
+
+  async upsertUserInfo(userInfo) {
+    const response = await http.post('/user', userInfo)
+    return response
+  }
 }
 
 export default new ApiService()

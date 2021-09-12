@@ -1,4 +1,5 @@
 import apiService from '../../services/api/_api.mock'
+import apiServiceReal from '@services/api'
 
 export default {
   async getUserInfo({ commit }, { id, pw }) {
@@ -9,5 +10,12 @@ export default {
       commit('SET_NICKNAME', nickname || '')
       commit('SET_UUID', uuid)
     }
+  },
+  async loginUser({ commit }, user) {
+    const response = await apiServiceReal.upsertUserInfo(user)
+    if (response.status === 200) {
+      commit('SET_USER', response.data)
+    }
+    return response.data
   },
 }

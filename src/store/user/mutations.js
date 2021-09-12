@@ -8,4 +8,7 @@ export default {
   SET_UUID(state, uuid) {
     state.uuid = uuid
   },
+  SET_USER(state, userInfo) {
+    state.user = userInfo
+  },
 }
