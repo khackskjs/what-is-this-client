@@ -48,7 +48,6 @@ export default {
       }
     },
     async onCardGroupFormClosed({ reload } = {}) {
-      console.log('closed form', { reload })
       if (reload) {
         await this.getCardGroupList()
       }

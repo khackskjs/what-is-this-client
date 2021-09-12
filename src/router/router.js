@@ -15,9 +15,6 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    meta: {
-      allowNotAuthenticated: true
-    },
   },
   {
     path: '/login',
@@ -62,13 +59,11 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('to', to.meta)
   if (to.matched.some(record => record.meta.allowNotAuthenticated)) {
     console.log('pass /login')
     next()
   } else {
     if (authService.isAuthenticated()) {
-      console.log('PASS auth')
       next()
     } else {
       console.log('redirect to /login')

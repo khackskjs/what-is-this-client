@@ -36,8 +36,7 @@
 
 <script>
 import CardGroupForms from '@/components/forms/CardGroupForms'
-import { mapGetters } from 'vuex'
-import { createNamespacedHelpers } from 'vuex'
+import { mapGetters, createNamespacedHelpers } from 'vuex'
 import { Card } from '@store/models/card.model'
 const userModule = createNamespacedHelpers('user')
 const cardModule = createNamespacedHelpers('card')

@@ -20,7 +20,6 @@ export default {
     CardGroupList,
   },
   props: {
-    
   },
   data() {
     return {
