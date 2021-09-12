@@ -20,5 +20,19 @@ export default {
     }
     
     return instance.delete(url, config)
-  }
+  },
+  /**
+   * 
+   * @param {Object} param
+   * @param {Function[]} param.request - [successFunction, failFunction]
+   * @param {Function[]} param.response - [successFunction, failFunction]
+   */
+  setInterceptors({ request, response }) {
+    if (request) {
+      instance.interceptors.request.use(...request)
+    }
+    if (response) {
+      instance.interceptors.response.use(...response)
+    }
+  },
 }

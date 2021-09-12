@@ -1,3 +1,4 @@
+import http from '@services/http'
 const user = {}
 const singleton = Symbol()
 const singletonEnforcer = Symbol()
@@ -11,6 +12,7 @@ class AuthService {
 
   setGoogleUser(userInfo) {
     user.google = userInfo
+    this._setHttpIntercepters()
   }
 
   isAuthenticated() {
@@ -43,6 +45,18 @@ class AuthService {
 
   getUserInfo() {
     return { email: this.getUserEmail(), name: this.getUserName() }
+  }
+
+  _setHttpIntercepters() {
+    http.setInterceptors({
+      request: [
+        (config) => {
+          config.headers.Authorization = `Bearer ${this.getUserIdToken()}`
+          return config
+        },
+        (error) => Promise.reject(error)
+      ]
+    })
   }
 }
 
