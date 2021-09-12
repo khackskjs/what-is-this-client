@@ -1,5 +1,5 @@
 <template>
-  <div class="position-absolute">
+  <div class="position-absolute d-flex justify-content-between w-100">
     <router-link
       v-if="isShow"
       to="/"
@@ -8,10 +8,19 @@
     >
       <md-icon>home</md-icon>
     </router-link>
+    <div>
+      <md-button
+        class="md-fab"
+        @click="logout"
+      >
+        <md-icon>logout</md-icon>
+      </md-button>
+    </div>
   </div>
 </template>
 
 <script>
+import authService from '@services/auth'
 export default {
   name: 'NavigationFabs',
   data() {
@@ -35,6 +44,11 @@ export default {
         this.currentPathName = route.name
       }
     }
+  },
+  methods: {
+    logout() {
+      authService.logout()
+    },
   },
 }
 </script>
