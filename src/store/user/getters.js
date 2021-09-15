@@ -2,8 +2,8 @@ export default {
   studyDateCount(state) {
     return state.studyDateCount
   },
-  nickname(state) {
-    return state.nickname
+  name(state) {
+    return state.name
   },
   uuid(state) {
     return state.uuid
