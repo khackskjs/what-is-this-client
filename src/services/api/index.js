@@ -33,6 +33,11 @@ class ApiService {
     const response = await http.post('/user', { email, name })
     return response
   }
+
+  async selectReviewCardList() {
+    const response = await http.get('/card/review/list')
+    return response
+  }
 }
 
 export default new ApiService()

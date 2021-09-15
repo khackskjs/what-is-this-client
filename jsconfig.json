@@ -5,6 +5,7 @@
     "baseUrl": ".",
     // Relative to "baseUrl"
     "paths": {
+      "@components/*": ["./src/components/*"],
       "@services/*": ["./src/services/*"],
       "@store/*": ["./src/store/*"],
     }

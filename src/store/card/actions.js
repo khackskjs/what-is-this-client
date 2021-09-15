@@ -32,5 +32,11 @@ export default {
     if (response.status === 200) {
       commit('DELETE_CARD_GROUP', guid)
     }
+  },
+  async getReviewCards({ commit }) {
+    const response = await apiServiceReal.selectReviewCardList()
+    if (response.status === 200) {
+      commit('', response.data)
+    }
   }
 }

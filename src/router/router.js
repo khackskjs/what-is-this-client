@@ -3,6 +3,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
+import CardReview from '../views/CardReview'
 import CardManagement from '../views/CardManagement.vue'
 import CardGroupListPage from '../views/CardGroupListPage.vue'
 import CardGroupForm from '../components/forms/CardGroupForms.vue'
@@ -32,6 +33,11 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/About.vue'),
+  },
+  {
+    path: '/review',
+    name: 'review',
+    component: CardReview,
   },
   {
     path: '/card-management',

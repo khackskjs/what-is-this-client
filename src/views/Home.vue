@@ -2,7 +2,7 @@
   <div>
     <div class="md-layout min-vh-100">
       <router-link
-        to="/card-review"
+        to="/review"
         tag="md-button"
         class="md-layout-item md-raised md-primary h-auto"
       >

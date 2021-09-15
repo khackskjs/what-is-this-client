@@ -21,7 +21,6 @@ const userModule = createNamespacedHelpers('user')
 
 export default {
   mounted() {
-    console.log('mounted')
     window.addEventListener('google-oauth-library-load', this.renderSigninButton)
   },
   methods: {
