@@ -29,8 +29,8 @@ class ApiService {
     return response
   }
 
-  async upsertUserInfo(userInfo) {
-    const response = await http.post('/user', userInfo)
+  async upsertUserInfo({ email, name }) {
+    const response = await http.post('/user', { email, name })
     return response
   }
 }

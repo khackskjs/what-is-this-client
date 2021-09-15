@@ -12,10 +12,6 @@ export default {
   components: {
     NavigationFabs,
   },
-  async mounted() {
-    // TODO remove when implement authentication
-    await this.$store.dispatch('user/getUserInfo', { id: 'khackskjs', pw: 'khackskjs' })
-  },
 }
 </script>
 
