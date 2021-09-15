@@ -1,6 +1,12 @@
 r<template>
   <div class="d-flex justify-content-center align-items-center vh-100 bg-light">
-    <div id="my-signin2" />
+    <div
+      v-if="!isLoginFailed"
+      id="my-signin2"
+    />
+    <div v-else>
+      {{ $t('login_failed_title') }}
+    </div>
     <!-- <form
       method="GET"
       action="http://localhost:13135/auth/google"
@@ -20,6 +26,11 @@ import { createNamespacedHelpers } from 'vuex'
 const userModule = createNamespacedHelpers('user')
 
 export default {
+  data() {
+    return {
+      isLoginFailed: false
+    }
+  },
   mounted() {
     window.addEventListener('google-oauth-library-load', this.renderSigninButton)
   },
@@ -41,8 +52,13 @@ export default {
     },
     async onSuccess(user) {
       authService.setGoogleUser(user)
-      this.loginUser(authService.getUserInfo())
-      this.$router.push({ name: 'Home' })
+      const result = await this.loginUser(authService.getUserInfo())
+      this.isLoginFailed = !result
+      if (result) {
+        this.$router.push({ name: 'Home' })
+      } else {
+        await authService.logout()
+      }
     },
     onFailure(error) {
       console.log('onFailure')
@@ -60,5 +76,8 @@ export default {
   cursor: pointer;
   width: 200px;
   height: 50px;
+}
+.login-failure-text {
+  font-size: 1.5rem;
 }
 </style>
