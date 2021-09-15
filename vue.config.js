@@ -8,5 +8,8 @@ module.exports = {
         logLevel: 'debug',
       }
     }
-  }
+  },
+  configureWebpack: {
+    devtool: 'source-map'
+  },
 }
