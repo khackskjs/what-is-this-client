@@ -7,6 +7,7 @@
 <script>
 import { createNamespacedHelpers } from 'vuex'
 const cardModule = createNamespacedHelpers('card')
+const userModule = createNamespacedHelpers('user')
 
 export default {
   name: 'CardReviewContainer',
@@ -15,13 +16,14 @@ export default {
     }
   },
   computed: {
+    ...userModule.mapGetters(['studyDateCount']),
   },
   mounted() {
-    this.getReviewCards()
+    this.getReviewCards(this.studyDateCount)
     console.log('mounted')
   },
   methods: {
-    ...cardModule.mapActions(['getReviewCards'])
+    ...cardModule.mapActions(['getReviewCards']),
   }
 }
 </script>

@@ -33,8 +33,8 @@ export default {
       commit('DELETE_CARD_GROUP', guid)
     }
   },
-  async getReviewCards({ commit }) {
-    const response = await apiServiceReal.selectReviewCardList()
+  async getReviewCards({ commit }, dateOfReview) {
+    const response = await apiServiceReal.selectReviewCardList(dateOfReview)
     if (response.status === 200) {
       commit('', response.data)
     }

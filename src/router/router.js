@@ -36,7 +36,7 @@ const routes = [
   },
   {
     path: '/review',
-    name: 'review',
+    name: 'Review',
     component: CardReview,
   },
   {

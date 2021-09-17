@@ -34,8 +34,9 @@ class ApiService {
     return response
   }
 
-  async selectReviewCardList() {
-    const response = await http.get('/card/review/list')
+  async selectReviewCardList(dateOfReview) {
+    const params = { dateOfReview }
+    const response = await http.get('/card/review/list', { params })
     return response
   }
 }
