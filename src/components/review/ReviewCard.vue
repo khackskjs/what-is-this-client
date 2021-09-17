@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      Total : {{ index }} / {{ total }}
+      {{ index }} / {{ total }} (Total) - Today: {{ studyDateCount }}
     </div>
     <div class="d-flex justify-content-center">
       <md-button
@@ -40,7 +40,7 @@
       {{ Object.values(reviewCardList).map(c => c.text1) }}
     </div>
     <div>
-      {{ reviewCard.text1 }} || {{ reviewCard.lastReviewResult }}
+      {{ card.text1 }} || {{ card.lastReviewResult }} || {{ card.dateOfReview }}
     </div>
   </div>
 </template>
@@ -48,6 +48,10 @@
 <script>
 import EventBus from '@/services/EventBus'
 import { REVIEW } from '@/services/api'
+import { createNamespacedHelpers } from 'vuex'
+
+const userModule = createNamespacedHelpers('user')
+const cardModule = createNamespacedHelpers('card')
 
 export default {
   name: 'ReviewCard',
@@ -58,12 +62,15 @@ export default {
     return {
       total: this.cardList.length,
       index: 0,
-      reviewCardList: [ ...this.cardList ],
     }
   },
   computed: {
-    reviewCard() {
+    ...userModule.mapGetters(['studyDateCount']),
+    card() {
       return this.reviewCardList[this.index] || {}
+    },
+    reviewCardList() {
+      return this.cardList
     },
   },
   mounted() {
@@ -83,10 +90,10 @@ export default {
     })
   },
   beforeDestroy() {
-    console.log('beforeDestroy')
     EventBus.$off('review:keyup')
   },
   methods: {
+    ...cardModule.mapActions(['reviewCard']),
     prevCard() {
       this.index = this.index === 0 ? 0 : this.index - 1
       console.log('prev')
@@ -96,21 +103,26 @@ export default {
       console.log('next')
     },
     cancelReview() {
-      this.reviewCard.lastReviewResult = REVIEW.NONE
+      this.updateCard(REVIEW.NONE)
       console.log('cancelReview')
     },
     successCard() {
-      this.reviewCard.lastReviewResult = REVIEW.SUCCESS
+      this.updateCard(REVIEW.SUCCESS)
       console.log('successCard')
     },
     failCard() {
-      this.reviewCard.lastReviewResult = REVIEW.FAIL
+      this.updateCard(REVIEW.FAIL)
       console.log('failCard')
     },
     shuffleCard() {
       this.reviewCardList.sort(() => 0.5 - Math.random())
       this.index = 0
       console.log('shuffleCard')
+    },
+    updateCard(result) {
+      this.card.lastReviewResult = result
+      this.card.dateOfReview = this.studyDateCount
+      this.reviewCard(this.card)
     },
   },
 }

@@ -45,6 +45,11 @@ class ApiService {
     const response = await http.get('/card/review/list', { params })
     return response
   }
+
+  async reviewCard({ cuid, lastReviewResult, dateOfReview }) {
+    const response = await http.post('/card/review', { cuid, lastReviewResult, dateOfReview })
+    return response
+  }
 }
 
 export default new ApiService()

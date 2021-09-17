@@ -1,6 +1,5 @@
 <template>
   <div>
-    Card Review Container
     <review-card :card-list="reviewCardList" />
   </div>
 </template>
