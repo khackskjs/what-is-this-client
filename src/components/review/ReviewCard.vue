@@ -40,20 +40,7 @@
 </template>
 
 <script>
-
-function onKeyup(e) {
-  if (e.code === 'ArrowLeft') {
-    this.prevCard()
-  } else if (e.code === 'ArrowRight') {
-    this.nextCard()
-  } else if (e.code === 'ArrowUp') {
-    this.successCard()
-  } else if (e.code === 'ArrowDown') {
-    this.failCard()
-  } else if (e.code === 'Space') {
-    this.cancelReview()
-  }
-}
+import EventBus from '@/services/EventBus'
 
 export default {
   name: 'ReviewCard',
@@ -66,12 +53,23 @@ export default {
     }
   },
   mounted() {
-    console.log('keyup event added')
-    window.addEventListener('keyup', onKeyup)
+    EventBus.$on('review:keyup', (e) => {
+      if (e.code === 'ArrowLeft') {
+        this.prevCard()
+      } else if (e.code === 'ArrowRight') {
+        this.nextCard()
+      } else if (e.code === 'ArrowUp') {
+        this.successCard()
+      } else if (e.code === 'ArrowDown') {
+        this.failCard()
+      } else if (e.code === 'Space') {
+        this.cancelReview()
+      }
+      console.log(`index/total: ${this.index}/${this.total}`)
+    })
   },
-  unmounted() {
-    console.log('unmounted')
-    window.removeEventListener('keyup',onKeyup)
+  beforeDestroy() {
+    EventBus.$off('review:keyup')
   },
   methods: {
     prevCard() {

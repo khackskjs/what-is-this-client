@@ -6,11 +6,23 @@
 </template>
 
 <script>
+import EventBus from '@/services/EventBus'
+
+function onKeyup(e) {
+  EventBus.$emit('review:keyup', e)
+}
+
 import NavigationFabs from '@/views/NavigationFabs'
 
 export default {
   components: {
     NavigationFabs,
+  },
+  mounted() {
+    window.addEventListener('keyup', onKeyup)
+  },
+  beforeDestroy() {
+    window.removeEventListener('keyup', onKeyup)
   },
 }
 </script>
