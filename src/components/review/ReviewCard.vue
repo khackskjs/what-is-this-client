@@ -6,6 +6,7 @@
     <div class="d-flex justify-content-center">
       <md-button
         class="md-raised md-primary"
+        @click="shuffleCard"
       >
         {{ $t('review__shuffle_button') }}
       </md-button>
@@ -39,6 +40,21 @@
 </template>
 
 <script>
+
+function onKeyup(e) {
+  if (e.code === 'ArrowLeft') {
+    this.prevCard()
+  } else if (e.code === 'ArrowRight') {
+    this.nextCard()
+  } else if (e.code === 'ArrowUp') {
+    this.successCard()
+  } else if (e.code === 'ArrowDown') {
+    this.failCard()
+  } else if (e.code === 'Space') {
+    this.cancelReview()
+  }
+}
+
 export default {
   name: 'ReviewCard',
   props: {
@@ -51,19 +67,11 @@ export default {
   },
   mounted() {
     console.log('keyup event added')
-    window.addEventListener('keyup', e => {
-      if (e.code === 'ArrowLeft') {
-        this.prevCard()
-      } else if (e.code === 'ArrowRight') {
-        this.nextCard()
-      } else if (e.code === 'ArrowUp') {
-        this.successCard()
-      } else if (e.code === 'ArrowDown') {
-        this.failCard()
-      } else if (e.code === 'Space') {
-        this.cancelReview()
-      }
-    })
+    window.addEventListener('keyup', onKeyup)
+  },
+  unmounted() {
+    console.log('unmounted')
+    window.removeEventListener('keyup',onKeyup)
   },
   methods: {
     prevCard() {
@@ -80,6 +88,10 @@ export default {
     },
     failCard() {
       console.log('failCard')
+    },
+    shuffleCard() {
+      this.reviewCardList.sort(() => 0.5 - Math.random())
+      console.log('shuffleCard')
     },
   },
 }
