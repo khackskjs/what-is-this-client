@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import CardGroupListContainer from '@/components/containers/CardGroupListContainer'
-import CardGroupFormContainer from '@/components/containers/CardGroupFormContainer'
+import CardGroupListContainer from '@containers/CardGroupListContainer'
+import CardGroupFormContainer from '@containers/CardGroupFormContainer'
 
 import { createNamespacedHelpers, mapActions } from 'vuex'
 const cardModule = createNamespacedHelpers('card')

@@ -1,5 +1,5 @@
 // import apiService from '../../services/api/_api.mock'
-import apiServiceReal from '@services/api'
+import apiServiceReal from '@/services/api'
 
 export default {
   async loginUser({ commit }, { email, name }) {

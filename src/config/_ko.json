@@ -1,4 +1,10 @@
 {
+  "review__shuffle_button": "카드 섞기",
+  "review__cancel_button": "취소",
+  "review__success_button": "성공",
+  "review__failure_button": "실패",
+  "review__prev_button": "이전",
+  "review__next_button": "다음",
   "login_failed_title": "서버 문제로 서비스를 이용 할 수 없습니다",
   "card_group_list__no_item_title": "카드 그룹이 없습니다",
   "card_group_form__card_add_button_title": "카드 추가",

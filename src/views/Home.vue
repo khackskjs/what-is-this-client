@@ -9,7 +9,7 @@
         REVIEW
       </router-link>
       <router-link
-        to="/card-management"
+        to="/management"
         tag="md-button"
         class="md-layout-item md-raised md-accent h-auto"
       >

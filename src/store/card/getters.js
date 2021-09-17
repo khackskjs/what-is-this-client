@@ -5,4 +5,7 @@ export default {
   cardListMap(state) {
     return state.cardListMap
   },
+  reviewCardList(state) {
+    return state.reviewCardList
+  },
 }

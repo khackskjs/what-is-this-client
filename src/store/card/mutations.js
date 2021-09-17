@@ -11,4 +11,7 @@ export default {
       state.cardGroupList.splice(index, 1)
     }
   },
+  SET_REVIEW_CARD_LIST(state, cardList) {
+    state.reviewCardList = cardList
+  },
 }

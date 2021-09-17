@@ -5,9 +5,8 @@ module.exports = {
       'module-resolver',
       {
         'alias': {
-          '@components': './src/components',
-          '@services': './src/services',
-          '@store': './src/store',
+          // '@': './src',
+          '@containers': './src/components/containers',
         }
       }
     ]

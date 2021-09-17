@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CardReviewContainer from '@components/containers/CardReviewContainer.vue'
+import CardReviewContainer from '@/components/containers/CardReviewContainer.vue'
 export default {
   name: 'CardReview',
   components: {

@@ -3,11 +3,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
-import CardReview from '../views/CardReview'
+import CardReview from '../views/CardReview.vue'
 import CardManagement from '../views/CardManagement.vue'
 import CardGroupListPage from '../views/CardGroupListPage.vue'
 import CardGroupForm from '../components/forms/CardGroupForms.vue'
-import authService from '@services/auth'
+
+import authService from '@/services/auth'
 
 Vue.use(VueRouter)
 
@@ -40,7 +41,7 @@ const routes = [
     component: CardReview,
   },
   {
-    path: '/card-management',
+    path: '/management',
     component: CardManagement,
     meta: { requiresAuth: true },
     children: [

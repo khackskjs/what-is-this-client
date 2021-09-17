@@ -1,5 +1,4 @@
-// import apiService from '@services/api/_api.mock'
-import apiServiceReal from '@services/api'
+import apiServiceReal from '@/services/api'
 
 export default {
   async saveCardGroup({  }, cardGroup) {
@@ -36,7 +35,7 @@ export default {
   async getReviewCards({ commit }, dateOfReview) {
     const response = await apiServiceReal.selectReviewCardList(dateOfReview)
     if (response.status === 200) {
-      commit('', response.data)
+      commit('SET_REVIEW_CARD_LIST', response.data)
     }
-  }
+  },
 }

@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import authService from '@services/auth'
+import authService from '@/services/auth'
 import { createNamespacedHelpers } from 'vuex'
 
 const userModule = createNamespacedHelpers('user')
