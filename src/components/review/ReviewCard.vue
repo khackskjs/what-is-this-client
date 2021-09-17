@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      Total : {{ total }}
+      Total : {{ index }} / {{ total }}
     </div>
     <div class="d-flex justify-content-center">
       <md-button
@@ -36,11 +36,18 @@
         {{ $t('review__next_button') }}
       </md-button>
     </div>
+    <div>
+      {{ Object.values(reviewCardList).map(c => c.text1) }}
+    </div>
+    <div>
+      {{ reviewCard.text1 }} || {{ reviewCard.lastReviewResult }}
+    </div>
   </div>
 </template>
 
 <script>
 import EventBus from '@/services/EventBus'
+import { REVIEW } from '@/services/api'
 
 export default {
   name: 'ReviewCard',
@@ -50,7 +57,14 @@ export default {
   data() {
     return {
       total: this.cardList.length,
+      index: 0,
+      reviewCardList: [ ...this.cardList ],
     }
+  },
+  computed: {
+    reviewCard() {
+      return this.reviewCardList[this.index] || {}
+    },
   },
   mounted() {
     EventBus.$on('review:keyup', (e) => {
@@ -69,26 +83,33 @@ export default {
     })
   },
   beforeDestroy() {
+    console.log('beforeDestroy')
     EventBus.$off('review:keyup')
   },
   methods: {
     prevCard() {
+      this.index = this.index === 0 ? 0 : this.index - 1
       console.log('prev')
     },
     nextCard() {
+      this.index = this.index === this.total - 1 ? this.total - 1 : this.index + 1
       console.log('next')
     },
     cancelReview() {
+      this.reviewCard.lastReviewResult = REVIEW.NONE
       console.log('cancelReview')
     },
     successCard() {
+      this.reviewCard.lastReviewResult = REVIEW.SUCCESS
       console.log('successCard')
     },
     failCard() {
+      this.reviewCard.lastReviewResult = REVIEW.FAIL
       console.log('failCard')
     },
     shuffleCard() {
       this.reviewCardList.sort(() => 0.5 - Math.random())
+      this.index = 0
       console.log('shuffleCard')
     },
   },

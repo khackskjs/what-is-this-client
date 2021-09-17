@@ -1,5 +1,11 @@
 import http from '../http'
 
+const REVIEW = {
+  NONE: 0,
+  SUCCESS: 1,
+  FAIL: 2,
+}
+
 class ApiService {
   constructor() {}
 
@@ -42,3 +48,4 @@ class ApiService {
 }
 
 export default new ApiService()
+export { REVIEW }
