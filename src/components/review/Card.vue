@@ -3,17 +3,19 @@
     <div class="card">
       <div
         class="card-side front d-flex justify-content-center align-items-center"
-        :style="{ transform: `${flip ? 'rotateX(180deg)' : ''}` }"
+        :style="{ transform: `${direction === 'up' ? 'rotateX(180deg)' : direction === 'down' ? 'rotateX(-180deg)' : ''}` }"
       >
-        <div class="d-block">
+        <div>
           {{ card.text1 }}
         </div>
       </div>
       <div
         class="card-side back d-flex justify-content-center align-items-center"
-        :style="{ transform: `${flip ? 'rotateX(0deg)' : 'rotateX(-180deg)'}` }"
+        :style="{ transform: `${direction === 'up' ? 'rotateX(0deg)' : direction === 'down' ? 'rotateX(-360deg)' : 'rotateX(-180deg)'}` }"
       >
-        <div>{{ card.text2 }}</div>
+        <div v-if="!hiding">
+          {{ card.text2 }}
+        </div>
       </div>
     </div>
   </div>
@@ -25,7 +27,36 @@ export default {
   name: 'Card',
   props: {
     card: { type: Object, default: () => ({}) },
-    flip: { type: Boolean, default: false },
+  },
+  data() {
+    return {
+      hiding: false,
+      direction: 'front',
+      currentCardSideFront: true,
+    }
+  },
+  watch: {
+    card: {
+      immediate: false,
+      handler() {
+        this.hiding = this.direction !== 'front'
+        this.flipCard('front')
+        console.log('WATCH card - hiding', this.hiding)
+      },
+    },
+  },
+  methods: {
+    flipCard(direction = 'front') {
+      console.log('flipCard', direction)
+      this.direction = direction
+      
+      if (direction === 'up') {
+        this.hiding = false
+      } else if (direction === 'down') {
+        this.hiding = false
+      } 
+    },
+
   },
 }
 </script>

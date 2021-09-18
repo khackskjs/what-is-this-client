@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      {{ index }} / {{ total }} (Total) - Today: {{ studyDateCount }}
+      Today: {{ studyDateCount }}
     </div>
     <div class="d-flex justify-content-center">
       <md-button
@@ -43,8 +43,8 @@
       {{ card.text1 }} || {{ card.lastReviewResult }} || {{ card.dateOfReview }}
     </div>
     <card
+      ref="cardComp"
       :card="card"
-      :flip="isFlip"
     />
   </div>
 </template>
@@ -70,7 +70,6 @@ export default {
     return {
       total: this.cardList.length,
       index: 0,
-      isFlip: false,
     }
   },
   computed: {
@@ -95,7 +94,6 @@ export default {
       } else if (e.code === 'Space') {
         this.cancelReview()
       }
-      console.log(`index/total: ${this.index}/${this.total}`)
     })
   },
   beforeDestroy() {
@@ -106,44 +104,36 @@ export default {
     prevCard() {
       this.index = this.index === 0 ? 0 : this.index - 1
       console.log('prev')
-
-      this.isFlip = false
     },
     nextCard() {
       this.index = this.index === this.total - 1 ? this.total - 1 : this.index + 1
       console.log('next')
-
-      this.isFlip = false
     },
     cancelReview() {
       this.updateCard(REVIEW.NONE)
-      console.log('cancelReview')
-
-      this.isFlip = false
+      this.flipCard('front')
     },
     successCard() {
       this.updateCard(REVIEW.SUCCESS)
-      console.log('successCard')
-
-      this.isFlip = true
+      this.flipCard('up')
     },
     failCard() {
       this.updateCard(REVIEW.FAIL)
-      console.log('failCard')
-
-      this.isFlip = true
+      this.flipCard('down')
     },
     shuffleCard() {
+      console.log('shuffleCard')
+      this.flipCard('front')
       this.reviewCardList.sort(() => 0.5 - Math.random())
       this.index = 0
-      console.log('shuffleCard')
-
-      this.isFlip = false
     },
     updateCard(result) {
       this.card.lastReviewResult = result
       this.card.dateOfReview = this.studyDateCount
       this.reviewCard(this.card)
+    },
+    flipCard(direction) {
+      this.$refs.cardComp && this.$refs.cardComp.flipCard(direction)
     },
   },
 }
