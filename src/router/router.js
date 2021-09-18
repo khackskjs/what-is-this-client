@@ -67,13 +67,11 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.allowNotAuthenticated)) {
-    console.log('pass /login')
     next()
   } else {
     if (authService.isAuthenticated()) {
       next()
     } else {
-      console.log('redirect to /login')
       next({ name: 'Login' })
     }
   }

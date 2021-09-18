@@ -38,7 +38,6 @@ export default class Card {
    * @param {string|Object} cardData 
    */
   static parse(cardData) {
-    console.log('parse', {...cardData})
     if (typeof cardData === 'string') {
       try {
         cardData = JSON.parse(cardData)

@@ -61,7 +61,6 @@ export default {
       }
     },
     onFailure(error) {
-      console.log('onFailure')
       console.error(error)
     },
   }

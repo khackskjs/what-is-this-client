@@ -1,6 +1,5 @@
 export default {
   selectedCardGroupUuid(state) {
-    console.log('root getter', state)
     return state.selectedCardGroupUuid
   },
   selectedCardGroup(state) {

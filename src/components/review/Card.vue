@@ -27,6 +27,7 @@
           :result="card.lastReviewResult"
         />
         <review-count
+          class="count-badge"
           :index="index"
           :total="total"
         />
@@ -66,7 +67,6 @@ export default {
       handler() {
         this.hiding = this.direction !== 'front'
         this.flipCard('front')
-        console.log('WATCH card - hiding', this.hiding)
       },
     },
   },

@@ -107,11 +107,9 @@ export default {
     ...cardModule.mapActions(['reviewCard']),
     prevCard() {
       this.index = this.index === 0 ? 0 : this.index - 1
-      console.log('prev')
     },
     nextCard() {
       this.index = this.index === this.total - 1 ? this.total - 1 : this.index + 1
-      console.log('next')
     },
     cancelReview() {
       this.updateCard(REVIEW.NONE)
