@@ -1,3 +1,14 @@
+/**
+ * @typedef {Card}
+ * @property {number} cuid
+ * @property {number} guid
+ * @property {string} text1
+ * @property {string} text2
+ * @property {number} reviewStage
+ * @property {number} lastReviewResult
+ * @property {number} dateOfReview
+ * @property {number} dateForNextReview
+ */
 export default class Card {
   constructor() {}
 
@@ -6,7 +17,7 @@ export default class Card {
   // text1             String
   // text2             String
   // reviewStage       Int       @default(0)   // [1, 2, 4, 8, 16, 32] 의 index 로 사용 할 것
-  // lastReviewResult  Int       @default(0)   // NONE: 0,
+  // lastReviewResult  Int       @default(0)   // NONE: 0, SUCCESS: 1, FAIL: 2
   // dateOfReview      Int
   // dateForNextReview Int
 

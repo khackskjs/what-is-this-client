@@ -5,6 +5,10 @@
         class="card-side front d-flex justify-content-center align-items-center"
         :style="{ transform: `${direction === 'up' ? 'rotateX(180deg)' : direction === 'down' ? 'rotateX(-180deg)' : ''}` }"
       >
+        <review-badge
+          class="status-badge"
+          :result="card.lastReviewResult"
+        />
         <div>
           {{ card.text1 }}
         </div>
@@ -13,6 +17,10 @@
         class="card-side back d-flex justify-content-center align-items-center"
         :style="{ transform: `${direction === 'up' ? 'rotateX(0deg)' : direction === 'down' ? 'rotateX(-360deg)' : 'rotateX(-180deg)'}` }"
       >
+        <review-badge
+          class="status-badge"
+          :result="card.lastReviewResult"
+        />
         <div v-if="!hiding">
           {{ card.text2 }}
         </div>
@@ -22,9 +30,11 @@
 </template>
 
 <script>
+import ReviewBadge from './ReviewBadge.vue'
 
 export default {
   name: 'Card',
+  components: { ReviewBadge },
   props: {
     card: { type: Object, default: () => ({}) },
   },
@@ -47,9 +57,8 @@ export default {
   },
   methods: {
     flipCard(direction = 'front') {
-      console.log('flipCard', direction)
       this.direction = direction
-      
+
       if (direction === 'up') {
         this.hiding = false
       } else if (direction === 'down') {
@@ -98,10 +107,10 @@ export default {
   background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
 }
 
-// .card:hover .card-side.front {
-//   transform: rotateX(180deg);
-// }
-// .card:hover .card-side.back {
-//   transform: rotateX(0deg);
-// }
+.status-badge {
+  font-size: 20px;
+  left: 20px;
+  position: absolute;
+  top: 20px;
+}
 </style>
