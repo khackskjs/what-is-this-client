@@ -9,6 +9,11 @@
           class="status-badge"
           :result="card.lastReviewResult"
         />
+        <review-count
+          class="count-badge"
+          :index="index"
+          :total="total"
+        />
         <div>
           {{ card.text1 }}
         </div>
@@ -21,6 +26,10 @@
           class="status-badge"
           :result="card.lastReviewResult"
         />
+        <review-count
+          :index="index"
+          :total="total"
+        />
         <div v-if="!hiding">
           {{ card.text2 }}
         </div>
@@ -31,12 +40,18 @@
 
 <script>
 import ReviewBadge from './ReviewBadge.vue'
+import ReviewCount from './ReviewCount.vue'
 
 export default {
   name: 'Card',
-  components: { ReviewBadge },
+  components: {
+    ReviewBadge,
+    ReviewCount,
+  },
   props: {
     card: { type: Object, default: () => ({}) },
+    index: { type: Number, default: () => 0 },
+    total: { type: Number, default: () => 0 },
   },
   data() {
     return {
@@ -111,6 +126,12 @@ export default {
   font-size: 20px;
   left: 20px;
   position: absolute;
+  top: 20px;
+}
+.count-badge {
+  font-size: 15px;
+  position: absolute;
+  right: 20px;
   top: 20px;
 }
 </style>

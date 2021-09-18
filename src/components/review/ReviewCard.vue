@@ -45,6 +45,8 @@
     <card
       ref="cardComp"
       :card="card"
+      :index="index"
+      :total="total"
     />
   </div>
 </template>
@@ -68,7 +70,6 @@ export default {
   },
   data() {
     return {
-      total: this.cardList.length,
       index: 0,
     }
   },
@@ -79,6 +80,9 @@ export default {
     },
     reviewCardList() {
       return this.cardList
+    },
+    total() {
+      return this.cardList.length
     },
   },
   mounted() {
