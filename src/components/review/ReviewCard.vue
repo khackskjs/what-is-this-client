@@ -42,6 +42,10 @@
     <div>
       {{ card.text1 }} || {{ card.lastReviewResult }} || {{ card.dateOfReview }}
     </div>
+    <card
+      :card="card"
+      :flip="isFlip"
+    />
   </div>
 </template>
 
@@ -49,12 +53,16 @@
 import EventBus from '@/services/EventBus'
 import { REVIEW } from '@/services/api'
 import { createNamespacedHelpers } from 'vuex'
+import Card from './Card.vue'
 
 const userModule = createNamespacedHelpers('user')
 const cardModule = createNamespacedHelpers('card')
 
 export default {
   name: 'ReviewCard',
+  components: {
+    Card,
+  },
   props: {
     cardList: { type: Array, default: () => [] },
   },
@@ -62,6 +70,7 @@ export default {
     return {
       total: this.cardList.length,
       index: 0,
+      isFlip: false,
     }
   },
   computed: {
@@ -97,27 +106,39 @@ export default {
     prevCard() {
       this.index = this.index === 0 ? 0 : this.index - 1
       console.log('prev')
+
+      this.isFlip = false
     },
     nextCard() {
       this.index = this.index === this.total - 1 ? this.total - 1 : this.index + 1
       console.log('next')
+
+      this.isFlip = false
     },
     cancelReview() {
       this.updateCard(REVIEW.NONE)
       console.log('cancelReview')
+
+      this.isFlip = false
     },
     successCard() {
       this.updateCard(REVIEW.SUCCESS)
       console.log('successCard')
+
+      this.isFlip = true
     },
     failCard() {
       this.updateCard(REVIEW.FAIL)
       console.log('failCard')
+
+      this.isFlip = true
     },
     shuffleCard() {
       this.reviewCardList.sort(() => 0.5 - Math.random())
       this.index = 0
       console.log('shuffleCard')
+
+      this.isFlip = false
     },
     updateCard(result) {
       this.card.lastReviewResult = result
