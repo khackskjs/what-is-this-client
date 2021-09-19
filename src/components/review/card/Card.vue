@@ -114,19 +114,41 @@ export default {
   width: 100%;
   font-size: 2rem;
   padding:2rem;
-  color: white
+  color: black;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .card-side.back {
   transform: rotateX(-180deg);
-  background-color: #4158D0;
-  background-image: linear-gradient(43deg, #4158D0 0%,#C850C0 46%, #FFCC70 100%);
+}
+.card-side.back::before {
+  content: '';
+  opacity: .3;
+  position: absolute;
+  border-radius: 15px;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-image: url('https://cdn.pixabay.com/photo/2021/09/15/15/26/glass-6627131_960_720.jpg');
 }
 
+
 .card-side.front {
-  background-color: #0093E9;
-  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+  position: relative;
 }
+.card-side.front::before {
+  content: '';
+  opacity: .3;
+  position: absolute;
+  border-radius: 15px;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-image: url('https://cdn.pixabay.com/photo/2021/09/14/14/17/himalayan-salt-6624128_960_720.jpg');
+}
+
 
 .status-badge {
   font-size: 20px;
