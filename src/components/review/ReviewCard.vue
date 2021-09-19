@@ -6,6 +6,12 @@
     <div class="d-flex justify-content-center">
       <md-button
         class="md-raised md-primary"
+        @click="arrangeCardsOrder(reviewCardList)"
+      >
+        {{ $t('review__arrange_order_button') }}
+      </md-button>
+      <md-button
+        class="md-raised md-primary"
         @click="shuffleCard"
       >
         {{ $t('review__shuffle_button') }}
@@ -36,17 +42,12 @@
         {{ $t('review__next_button') }}
       </md-button>
     </div>
-    <div>
-      {{ Object.values(reviewCardList).map(c => c.text1) }}
-    </div>
-    <div>
-      {{ card.text1 }} || {{ card.lastReviewResult }} || {{ card.dateOfReview }}
-    </div>
     <card
       ref="cardComp"
       :card="card"
       :index="index"
       :total="total"
+      :guid-name-map="guidNameMap"
     />
   </div>
 </template>
@@ -55,7 +56,7 @@
 import EventBus from '@/services/EventBus'
 import { REVIEW } from '@/services/api'
 import { createNamespacedHelpers } from 'vuex'
-import Card from './Card.vue'
+import Card from './card/Card.vue'
 
 const userModule = createNamespacedHelpers('user')
 const cardModule = createNamespacedHelpers('card')
@@ -67,6 +68,7 @@ export default {
   },
   props: {
     cardList: { type: Array, default: () => [] },
+    guidNameMap: { type: Object, default: () => ({}) },
   },
   data() {
     return {
@@ -136,6 +138,10 @@ export default {
     },
     flipCard(direction) {
       this.$refs.cardComp && this.$refs.cardComp.flipCard(direction)
+    },
+    arrangeCardsOrder(cardList) {
+      cardList.sort((c1, c2) => c1.lastReviewResult - c2.lastReviewResult)
+      this.index = 0
     },
   },
 }

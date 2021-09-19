@@ -1,7 +1,7 @@
 <template>
   <div>
     <span class="badge rounded-pill bg-light text-dark">
-      {{ index }} / {{ total }}
+      {{ current }} / {{ total }}
     </span>
   </div>
 </template>
@@ -10,12 +10,8 @@
 export default {
   name: 'ReviewCount',
   props: {
-    index: { type: Number, default: () => 0 },
+    current: { type: Number, default: () => 0 },
     total: { type: Number, default: () => 0 },
   },
 }
 </script>
-
-<style>
-
-</style>

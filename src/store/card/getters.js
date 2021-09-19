@@ -2,7 +2,7 @@ export default {
   groupList(state) {
     return state.cardGroupList
   },
-  cardListMap(state) {
+  cardListMapByGuid(state) {
     return state.cardListMap
   },
   reviewCardList(state) {

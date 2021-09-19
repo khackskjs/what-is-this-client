@@ -9,9 +9,12 @@
           class="status-badge"
           :result="card.lastReviewResult"
         />
+        <div class="group-name">
+          {{ guidNameMap[card.guid] }}
+        </div>
         <review-count
           class="count-badge"
-          :index="index"
+          :current="index + 1"
           :total="total"
         />
         <div>
@@ -26,9 +29,12 @@
           class="status-badge"
           :result="card.lastReviewResult"
         />
+        <div class="group-name">
+          {{ guidNameMap[card.guid] }}
+        </div>
         <review-count
           class="count-badge"
-          :index="index"
+          :current="index + 1"
           :total="total"
         />
         <div v-if="!hiding">
@@ -53,6 +59,7 @@ export default {
     card: { type: Object, default: () => ({}) },
     index: { type: Number, default: () => 0 },
     total: { type: Number, default: () => 0 },
+    guidNameMap: { type: Object, default: () => ({}) },
   },
   data() {
     return {
@@ -92,7 +99,6 @@ export default {
   position: relative;
   height: 20rem;
   width: 800px;
-  margin: 2rem;
   box-shadow: none;
   background: none;
 }
@@ -125,6 +131,11 @@ export default {
 .status-badge {
   font-size: 20px;
   left: 20px;
+  position: absolute;
+  top: 20px;
+}
+.group-name {
+  font-size: 15px;
   position: absolute;
   top: 20px;
 }

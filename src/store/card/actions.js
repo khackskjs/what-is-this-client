@@ -14,8 +14,8 @@ export default {
       return response.data
     }
   },
-  async getCardGroupList({ commit }) {
-    const response = await apiService.getCardGroupList()
+  async getCardGroupList({ commit }, guidList) {
+    const response = await apiService.getCardGroupList(guidList)
     if (response.status === 200) {
       commit('SET_GROUP_LIST', response.data)
     }
