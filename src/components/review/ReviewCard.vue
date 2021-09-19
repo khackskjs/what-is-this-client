@@ -120,7 +120,7 @@ export default {
       this.flipCard('up')
     },
     failCard() {
-      this.updateCard(REVIEW.FAIL)
+      this.updateCard(REVIEW.FAILURE)
       this.flipCard('down')
     },
     shuffleCard() {

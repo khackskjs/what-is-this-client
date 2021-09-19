@@ -17,7 +17,7 @@ export default class Card {
   // text1             String
   // text2             String
   // reviewStage       Int       @default(0)   // [1, 2, 4, 8, 16, 32] 의 index 로 사용 할 것
-  // lastReviewResult  Int       @default(0)   // NONE: 0, SUCCESS: 1, FAIL: 2
+  // lastReviewResult  Int       @default(0)   // NONE: 0, SUCCESS: 1, FAILURE: 2
   // dateOfReview      Int
   // dateForNextReview Int
 

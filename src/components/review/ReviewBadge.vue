@@ -20,11 +20,11 @@ export default {
   computed: {
     resultText() {
       return this.result === REVIEW.SUCCESS ?
-        'SUCCESS' : this.result === REVIEW.FAIL ? 'FAILURE' : ''
+        'SUCCESS' : this.result === REVIEW.FAILURE ? 'FAILURE' : ''
     },
     badgeClass() {
       return this.result === REVIEW.SUCCESS ?
-        'bg-success' : this.result === REVIEW.FAIL ? 'bg-danger' : ''
+        'bg-success' : this.result === REVIEW.FAILURE ? 'bg-danger' : ''
     },
   },
 }
