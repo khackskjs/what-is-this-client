@@ -73,6 +73,7 @@ export default {
   data() {
     return {
       index: 0,
+      cardDirection: 'front',
     }
   },
   computed: {
@@ -85,6 +86,9 @@ export default {
     },
     total() {
       return this.cardList.length
+    },
+    isFrontSide() {
+      return this.$refs.cardComp && this.$refs.cardComp.isFrontSide()
     },
   },
   mounted() {
@@ -99,6 +103,8 @@ export default {
         this.failCard()
       } else if (e.code === 'Space') {
         this.cancelReview()
+      } else if (e.code === 'Enter') {
+        this.showFrontSide()  // 리뷰 결과에 영향을 미치지 않고, 앞면만 보여줍니다.
       }
     })
   },
@@ -109,9 +115,11 @@ export default {
     ...cardModule.mapActions(['reviewCard']),
     prevCard() {
       this.index = this.index === 0 ? 0 : this.index - 1
+      this.cardDirection = 'front'
     },
     nextCard() {
       this.index = this.index === this.total - 1 ? this.total - 1 : this.index + 1
+      this.cardDirection = 'front'
     },
     cancelReview() {
       this.updateCard(REVIEW.NONE)
@@ -119,11 +127,11 @@ export default {
     },
     successCard() {
       this.updateCard(REVIEW.SUCCESS)
-      this.flipCard('up')
+      this.cardDirection === 'up' ? this.nextCard() : this.flipCard('up')
     },
     failCard() {
       this.updateCard(REVIEW.FAILURE)
-      this.flipCard('down')
+      this.cardDirection === 'down' ? this.nextCard() : this.flipCard('down')
     },
     shuffleCard(cardList) {
       this.flipCard('front')
@@ -136,13 +144,19 @@ export default {
       this.reviewCard(this.card)
     },
     flipCard(direction) {
-      this.$refs.cardComp && this.$refs.cardComp.flipCard(direction)
+      if (this.$refs.cardComp) {
+        this.cardDirection = direction
+        this.$refs.cardComp.flipCard(direction)
+      }
     },
     arrangeCardsOrder(cardList) {
       cardList.filter(c => c.lastReviewResult === REVIEW.NONE)
       cardList.sort((c1, ) => c1.lastReviewResult === REVIEW.NONE ? -1 : c1.lastReviewResult === REVIEW.FAILURE ? 0 : 1)
       this.index = 0
     },
+    showFrontSide() {
+      this.flipCard('front')
+    }
   },
 }
 </script>
