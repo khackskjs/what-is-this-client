@@ -20,6 +20,9 @@
         <div>
           {{ card.text1 }}
         </div>
+        <div class="review-stage-badge">
+          <span class="badge bg-primary">Level {{ card.reviewStage + 1 }}</span>
+        </div>
       </div>
       <div
         class="card-side back d-flex justify-content-center align-items-center"
@@ -39,6 +42,9 @@
         />
         <div v-if="!hiding">
           {{ card.text2 }}
+        </div>
+        <div class="review-stage-badge">
+          <span class="badge bg-primary">Level {{ card.reviewStage + 1 }}</span>
         </div>
       </div>
     </div>
@@ -166,5 +172,10 @@ export default {
   position: absolute;
   right: 20px;
   top: 20px;
+}
+.review-stage-badge {
+  position: absolute;
+  bottom: 10px;
+  font-size: 1rem;
 }
 </style>
