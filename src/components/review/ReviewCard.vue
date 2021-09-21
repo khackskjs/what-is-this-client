@@ -48,6 +48,7 @@
       :index="index"
       :total="total"
       :guid-name-map="guidNameMap"
+      @touch:card="onCardTouch"
     />
   </div>
 </template>
@@ -93,14 +94,14 @@ export default {
   },
   mounted() {
     EventBus.$on('review:keyup', (e) => {
-      if (e.code === 'ArrowLeft') {
-        this.prevCard()
-      } else if (e.code === 'ArrowRight') {
-        this.nextCard()
-      } else if (e.code === 'ArrowUp') {
+      if (e.code === 'ArrowUp') {
         this.successCard()
       } else if (e.code === 'ArrowDown') {
         this.failCard()
+      } else if (e.code === 'ArrowLeft') {
+        this.prevCard()
+      } else if (e.code === 'ArrowRight') {
+        this.nextCard()
       } else if (e.code === 'Space') {
         this.cancelReview()
       } else if (e.code === 'Enter') {
@@ -156,6 +157,21 @@ export default {
     },
     showFrontSide() {
       this.flipCard('front')
+    },
+    onCardTouch(event) {
+      if (event === 'up') {
+        this.successCard()
+      } else if (event === 'down') {
+        this.failCard()
+      } else if (event === 'left') {
+        this.prevCard()
+      } else if (event === 'right') {
+        this.nextCard()
+      } else if (event === 'center') {
+        this.cancelReview()
+      }
+
+      console.log('onCardTouch', event)
     }
   },
 }
