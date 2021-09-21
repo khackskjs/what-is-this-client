@@ -13,4 +13,7 @@ export default {
     }
     return response.data
   },
+  async clearLoginInfo({ commit }) {
+    commit('CLEAR_USER_INFO')
+  },
 }

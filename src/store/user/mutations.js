@@ -4,4 +4,9 @@ export default {
     state.name = userInfo.name
     state.uuid = userInfo.uuid
   },
+  CLEAR_USER_INFO(state) {
+    state.uuid = ''
+    state.name = ''
+    state.studyDateCount = 0
+  }
 }

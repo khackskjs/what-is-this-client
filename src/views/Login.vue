@@ -69,8 +69,7 @@ export default {
 
 <style lang="scss" scoped>
 #google_login_btn {
-  background: url("/images/btn_google_signin_dark_normal_web@2x.png")
-      no-repeat;
+  background: url("/images/btn_google_signin_dark_normal_web@2x.png") no-repeat;
   background-size: 100% 100%;
   cursor: pointer;
   width: 200px;

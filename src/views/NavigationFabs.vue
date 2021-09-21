@@ -56,10 +56,15 @@ export default {
     }
   },
   methods: {
+    ...userModule.mapActions(['clearLoginInfo']),
     async logout() {
       console.log('clicked logout')
       await authService.logout()
-      this.$router.push({ name: 'login' })
+      await this.clearLoginInfo()
+      this.$router.push({ name: 'Login' })
+      setTimeout(() => {
+        this.$router.go()
+      }, 300)
     },
   },
 }
