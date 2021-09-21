@@ -12,7 +12,7 @@
       </md-button>
       <md-button
         class="md-raised md-primary"
-        @click="shuffleCard"
+        @click="shuffleCard(reviewCardList)"
       >
         {{ $t('review__shuffle_button') }}
       </md-button>
@@ -125,11 +125,10 @@ export default {
       this.updateCard(REVIEW.FAILURE)
       this.flipCard('down')
     },
-    shuffleCard() {
-      console.log('shuffleCard')
+    shuffleCard(cardList) {
       this.flipCard('front')
-      this.reviewCardList.sort(() => 0.5 - Math.random())
-      this.index = 0
+      cardList.sort(() => 0.5 - Math.random())
+      this.arrangeCardsOrder(cardList)
     },
     updateCard(result) {
       this.card.lastReviewResult = result
@@ -140,7 +139,8 @@ export default {
       this.$refs.cardComp && this.$refs.cardComp.flipCard(direction)
     },
     arrangeCardsOrder(cardList) {
-      cardList.sort((c1, c2) => c1.lastReviewResult - c2.lastReviewResult)
+      cardList.filter(c => c.lastReviewResult === REVIEW.NONE)
+      cardList.sort((c1, ) => c1.lastReviewResult === REVIEW.NONE ? -1 : c1.lastReviewResult === REVIEW.FAILURE ? 0 : 1)
       this.index = 0
     },
   },
