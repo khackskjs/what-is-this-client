@@ -9,10 +9,11 @@
       :index="index"
       :total="total"
       :guid-name-map="guidNameMap"
-      @touch:card="onCardTouch"
+      @touch:card="onCardControl"
     />
     <review-card-controller
       :review-count="reviewCount"
+      @card-control="onCardControl"
     />
   </div>
 </template>
@@ -137,21 +138,37 @@ export default {
     showFrontSide() {
       this.flipCard('front')
     },
-    onCardTouch(event) {
-      if (event === 'up') {
-        this.successCard()
-      } else if (event === 'down') {
-        this.failCard()
-      } else if (event === 'left') {
-        this.prevCard()
-      } else if (event === 'right') {
-        this.nextCard()
-      } else if (event === 'center') {
-        this.cancelReview()
-      }
+    onCardControl(event) {
 
-      console.log('onCardTouch', event)
-    }
+      switch (event) {
+        case 'up':
+        case 'success':
+          this.successCard()
+          break
+        case 'down':
+        case 'fail':
+          this.failCard()
+          break
+        case 'left':
+        case 'previous':
+          this.prevCard()
+          break
+        case 'right':
+        case 'next':
+          this.nextCard()
+          break
+        case 'center':
+        case 'cancel':
+          this.cancelReview()
+          break
+        case 'shuffle':
+          this.shuffleCard()
+          break
+        case 'arrange':
+          this.arrangeCardsOrder()
+          break
+      }
+    },
   },
 }
 </script>

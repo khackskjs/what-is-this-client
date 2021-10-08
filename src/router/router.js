@@ -69,7 +69,10 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.allowNotAuthenticated)) {
     next()
   } else {
-    if (authService.isAuthenticated()) {
+    const isAuthenticated = authService.isAuthenticated()
+    console.log(`beforeEach from[${from.fullPath}] to[${to.fullPath}]`, isAuthenticated)
+    if (isAuthenticated) {
+
       next()
     } else {
       next({ name: 'Login' })
