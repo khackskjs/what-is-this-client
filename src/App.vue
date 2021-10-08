@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <screen-orientation />
     <navigation-fabs />
     <router-view />
   </div>
@@ -13,10 +14,12 @@ function onKeyup(e) {
 }
 
 import NavigationFabs from '@/views/NavigationFabs'
+import ScreenOrientation from '@/util/ScreenOrientation'
 
 export default {
   components: {
     NavigationFabs,
+    ScreenOrientation
   },
   mounted() {
     window.addEventListener('keyup', onKeyup)
