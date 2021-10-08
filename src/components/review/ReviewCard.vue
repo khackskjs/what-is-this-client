@@ -3,45 +3,6 @@
     <div>
       Today: {{ studyDateCount }}
     </div>
-    <div class="d-flex justify-content-center">
-      <md-button
-        class="md-raised md-primary"
-        @click="arrangeCardsOrder(reviewCardList)"
-      >
-        {{ $t('review__arrange_order_button') }}
-      </md-button>
-      <md-button
-        class="md-raised md-primary"
-        @click="shuffleCard(reviewCardList)"
-      >
-        {{ $t('review__shuffle_button') }}
-      </md-button>
-      <md-button
-        class="md-raised md-primary"
-      >
-        {{ $t('review__cancel_button') }}
-      </md-button>
-      <md-button
-        class="md-raised md-primary"
-      >
-        {{ $t('review__success_button') }}
-      </md-button>
-      <md-button
-        class="md-raised md-primary"
-      >
-        {{ $t('review__failure_button') }}
-      </md-button>
-      <md-button
-        class="md-raised md-primary"
-      >
-        {{ $t('review__prev_button') }}
-      </md-button>
-      <md-button
-        class="md-raised md-primary"
-      >
-        {{ $t('review__next_button') }}
-      </md-button>
-    </div>
     <card
       ref="cardComp"
       :card="card"
@@ -49,6 +10,9 @@
       :total="total"
       :guid-name-map="guidNameMap"
       @touch:card="onCardTouch"
+    />
+    <review-card-controller
+      :review-count="reviewCount"
     />
   </div>
 </template>
@@ -58,6 +22,7 @@ import EventBus from '@/services/EventBus'
 import { REVIEW } from '@/services/api'
 import { createNamespacedHelpers } from 'vuex'
 import Card from './card/Card.vue'
+import ReviewCardController from './ReviewCardController.vue'
 
 const userModule = createNamespacedHelpers('user')
 const cardModule = createNamespacedHelpers('card')
@@ -66,6 +31,7 @@ export default {
   name: 'ReviewCard',
   components: {
     Card,
+    ReviewCardController,
   },
   props: {
     cardList: { type: Array, default: () => [] },
@@ -90,6 +56,19 @@ export default {
     },
     isFrontSide() {
       return this.$refs.cardComp && this.$refs.cardComp.isFrontSide()
+    },
+    reviewCount() {
+      const object = this.cardList.reduce((prev, card) => {
+        prev[card.lastReviewResult]++
+        prev.total++
+        return prev
+      }, { '0': 0, '1': 0, '2': 0, total: 0 })
+      return {
+        none: object[0],
+        success: object[1],
+        failure: object[2],
+        total: object.total,
+      }
     },
   },
   mounted() {
@@ -134,10 +113,10 @@ export default {
       this.updateCard(REVIEW.FAILURE)
       this.cardDirection === 'down' ? this.nextCard() : this.flipCard('down')
     },
-    shuffleCard(cardList) {
+    shuffleCard() {
       this.flipCard('front')
-      cardList.sort(() => 0.5 - Math.random())
-      this.arrangeCardsOrder(cardList)
+      this.reviewCardList.sort(() => 0.5 - Math.random())
+      this.arrangeCardsOrder()
     },
     updateCard(result) {
       this.card.lastReviewResult = result
@@ -150,9 +129,9 @@ export default {
         this.$refs.cardComp.flipCard(direction)
       }
     },
-    arrangeCardsOrder(cardList) {
-      cardList.filter(c => c.lastReviewResult === REVIEW.NONE)
-      cardList.sort((c1, ) => c1.lastReviewResult === REVIEW.NONE ? -1 : c1.lastReviewResult === REVIEW.FAILURE ? 0 : 1)
+    arrangeCardsOrder() {
+      this.reviewCardList.filter(c => c.lastReviewResult === REVIEW.NONE)
+      this.reviewCardList.sort((c1, ) => c1.lastReviewResult === REVIEW.NONE ? -1 : c1.lastReviewResult === REVIEW.FAILURE ? 0 : 1)
       this.index = 0
     },
     showFrontSide() {

@@ -1,4 +1,4 @@
-r<template>
+<template>
   <div class="d-flex justify-content-center align-items-center vh-100 bg-light">
     <div
       v-if="!isLoginFailed"
