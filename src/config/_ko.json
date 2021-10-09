@@ -1,6 +1,7 @@
 {
   "login_failed_title": "서버 문제로 서비스를 이용 할 수 없습니다",
   "card_group_list__no_item_title": "카드 그룹이 없습니다",
+  "card_group_list__no_item_description": "카드 그룹과 카드를 생성 해 주세요.",
   "card_group_form__card_add_button_title": "카드 추가",
   "card_group_form__card_delete_button_title": "카드 삭제",
   "card_group_form_close_button_title": "닫기",

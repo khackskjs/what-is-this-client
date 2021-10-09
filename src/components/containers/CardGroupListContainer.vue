@@ -9,9 +9,11 @@
       v-else
       class="d-flex justify-content-center mt-3"
     >
-      <div class="no-card-title">
-        {{ $t('card_group_list__no_item_title') }}
-      </div>
+      <md-empty-state
+        md-icon="work_off"
+        :md-label="$t('card_group_list__no_item_title')"
+        :md-description="$t('card_group_list__no_item_description')"
+      />
     </div>
   </div>
 </template>
@@ -61,9 +63,3 @@ export default {
   },
 }
 </script>
-
-<style>
-.no-card-title {
-  font-size: 1.5rem;
-}
-</style>

@@ -25,6 +25,7 @@ import {
   MdAvatar,
   MdDialog,
   MdTabs,
+  MdEmptyState,
 } from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
 // import 'vue-material/dist/theme/black-green-dark.css'
@@ -41,3 +42,4 @@ Vue.use(MdDivider)
 Vue.use(MdAvatar)
 Vue.use(MdDialog)
 Vue.use(MdTabs)
+Vue.use(MdEmptyState)
