@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="card-review-area mx-auto">
     <div>
-      Today: {{ studyDateCount }}
+      - {{ deviceInnerHeight }}
     </div>
     <card
       ref="cardComp"
@@ -9,9 +9,11 @@
       :index="index"
       :total="total"
       :guid-name-map="guidNameMap"
+      :card-height="cardHeight"
       @touch:card="onCardControl"
     />
     <review-card-controller
+      class="mt-1"
       :review-count="reviewCount"
       @card-control="onCardControl"
     />
@@ -21,7 +23,7 @@
 <script>
 import EventBus from '@/services/EventBus'
 import { REVIEW } from '@/services/api'
-import { createNamespacedHelpers } from 'vuex'
+import { createNamespacedHelpers, mapGetters } from 'vuex'
 import Card from './card/Card.vue'
 import ReviewCardController from './ReviewCardController.vue'
 
@@ -45,7 +47,13 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['deviceInnerHeight']),
     ...userModule.mapGetters(['studyDateCount']),
+    cardHeight() {
+      const cardHeight = `${this.deviceInnerHeight - 145}px`
+      
+      return cardHeight
+    },
     card() {
       return this.reviewCardList[this.index] || {}
     },
@@ -139,7 +147,6 @@ export default {
       this.flipCard('front')
     },
     onCardControl(event) {
-
       switch (event) {
         case 'up':
         case 'success':
@@ -173,6 +180,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.card-review-area {
+  max-width: 1280px;
+}
 </style>

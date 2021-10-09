@@ -48,9 +48,6 @@ export default {
 </script>
 
 <style>
-.review-result {
-  font-size: 20px !important;
-}
 .count-space {
   margin-left: .5rem !important;
   margin-right: .5rem !important;

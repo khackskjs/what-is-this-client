@@ -4,28 +4,21 @@
       <router-link
         to="/review"
         tag="md-button"
-        class="md-layout-item md-raised md-primary h-auto"
+        class="md-layout-item md-small-size-100 md-raised md-primary h-auto"
       >
-        REVIEW
+        <md-icon class="md-size-3x">
+          school
+        </md-icon>
       </router-link>
       <router-link
         to="/management"
         tag="md-button"
-        class="md-layout-item md-raised md-accent h-auto"
+        class="md-layout-item md-small-size-100 md-raised md-accent h-auto menu-icon-size"
       >
-        EDIT
-      </router-link>
-      <!-- <div class="md-layout-item">
-        <md-button class="md-raised md-primary">
-          EDIT
-        </md-button>
-      </div> -->
-
-      <!-- <md-button class="md-fab md-primary">
-        <md-icon class="md-size-2x">
-          edit_note
+        <md-icon class="md-size-3x">
+          post_add
         </md-icon>
-      </md-button> -->
+      </router-link>
     </div>
   </div>
 </template>
@@ -38,3 +31,9 @@ export default {
   components: {},
 }
 </script>
+
+<style lang="scss" scoped>
+.menu-icon-size {
+  font: 2em !important;
+}
+</style>

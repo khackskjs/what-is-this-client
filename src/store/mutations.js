@@ -8,4 +8,8 @@ export default {
   SET_DEVICE_ORIENTATION(state, orientation) {
     state.deviceOrientation = orientation
   },
+  SET_INNER_WIDTH_HEIGHT(state, {width, height}) {
+    state.deviceInnerHeight = height
+    state.deviceInnerWidth = width
+  }
 }

@@ -3,10 +3,11 @@
     <div
       id="card-div"
       class="card"
+      :style="{ height: cardHeight }"
     >
       <div
         class="card-side front d-flex justify-content-center align-items-center"
-        :style="{ transform: `${direction === 'up' ? 'rotateX(180deg)' : direction === 'down' ? 'rotateX(-180deg)' : ''}` }"
+        :style="{ height: cardHeight, transform: `${direction === 'up' ? 'rotateX(180deg)' : direction === 'down' ? 'rotateX(-180deg)' : ''}` }"
       >
         <review-badge
           class="status-badge"
@@ -29,7 +30,7 @@
       </div>
       <div
         class="card-side back d-flex justify-content-center align-items-center"
-        :style="{ transform: `${direction === 'up' ? 'rotateX(0deg)' : direction === 'down' ? 'rotateX(-360deg)' : 'rotateX(-180deg)'}` }"
+        :style="{ height: cardHeight, transform: `${direction === 'up' ? 'rotateX(0deg)' : direction === 'down' ? 'rotateX(-360deg)' : 'rotateX(-180deg)'}` }"
       >
         <review-badge
           class="status-badge"
@@ -69,6 +70,7 @@ export default {
     index: { type: Number, default: () => 0 },
     total: { type: Number, default: () => 0 },
     guidNameMap: { type: Object, default: () => ({}) },
+    cardHeight: { type: String, default: () => '400px' }
   },
   data() {
     return {
@@ -154,14 +156,14 @@ export default {
   border: 0;
   perspective: 150rem;
   position: relative;
-  height: 20rem;
-  width: 800px;
+  // height: 500px;
+  width: 100%;
   box-shadow: none;
   background: none;
 }
 
 .card-side {
-  height: 20rem;
+  // height: 500px;
   border-radius: 15px;
   transition: all 0.8s ease;
   backface-visibility: hidden;
@@ -188,6 +190,8 @@ export default {
   right: 0px;
   bottom: 0px;
   background-image: url('https://cdn.pixabay.com/photo/2021/09/15/15/26/glass-6627131_960_720.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 
@@ -204,6 +208,8 @@ export default {
   right: 0px;
   bottom: 0px;
   background-image: url('https://cdn.pixabay.com/photo/2021/09/14/14/17/himalayan-salt-6624128_960_720.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 

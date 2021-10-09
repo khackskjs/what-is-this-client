@@ -9,4 +9,10 @@ export default {
   selectedCardList(state) {
     return state.card.cardListMap[state.selectedCardGroupUuid]
   },
+  deviceInnerWidth(state) {
+    return state.deviceInnerWidth
+  },
+  deviceInnerHeight(state) {
+    return state.deviceInnerHeight
+  },
 }

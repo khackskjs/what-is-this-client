@@ -6,4 +6,7 @@ export default {
   async setDeviceOrientation({ commit }, orientation) {
     commit('SET_DEVICE_ORIENTATION', orientation)
   },
+  async setInnerWidthHieght({ commit }, {width, height}) {
+    commit('SET_INNER_WIDTH_HEIGHT', {width, height})
+  }
 }

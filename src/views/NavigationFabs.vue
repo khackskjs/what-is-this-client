@@ -1,17 +1,19 @@
 <template>
-  <div class="position-absolute d-flex justify-content-between w-100">
+  <div class="position-absolute w-100 h-100">
     <div v-if="isAuth">
-      <router-link
-        v-if="isShow"
-        to="/"
-        tag="md-button"
-        class="md-fab"
-      >
-        <md-icon>home</md-icon>
-      </router-link>
-      <div>
-        <md-button
+      <div class="home-btn-area">
+        <router-link
+          v-if="isShow"
+          to="/"
+          tag="md-button"
           class="md-fab"
+        >
+          <md-icon>home</md-icon>
+        </router-link>
+      </div>
+      <div class="logout-btn-area">
+        <md-button
+          class="md-fab md-primary"
           @click="logout"
         >
           <md-icon>logout</md-icon>
@@ -71,4 +73,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.home-btn-area {
+  position: absolute;
+  bottom: 10px;
+  left: 0px;
+}
+.logout-btn-area {
+  position: absolute;
+  bottom: 10px;
+  right: 0px;
+}
 </style>
