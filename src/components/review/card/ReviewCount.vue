@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span class="badge rounded-pill bg-light text-dark">
+    <span class="badge rounded-pill bg-light text-dark count-text">
       {{ current }} / {{ total }}
     </span>
   </div>
@@ -15,3 +15,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.count-text {
+  font-size: 1rem;
+}
+</style>

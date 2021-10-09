@@ -1,8 +1,5 @@
 <template>
   <div class="card-review-area mx-auto">
-    <div>
-      - {{ deviceInnerHeight }}
-    </div>
     <card
       ref="cardComp"
       :card="card"
@@ -50,8 +47,7 @@ export default {
     ...mapGetters(['deviceInnerHeight']),
     ...userModule.mapGetters(['studyDateCount']),
     cardHeight() {
-      const cardHeight = `${this.deviceInnerHeight - 145}px`
-      
+      const cardHeight = `${this.deviceInnerHeight - 130}px`
       return cardHeight
     },
     card() {

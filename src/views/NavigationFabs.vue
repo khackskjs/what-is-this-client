@@ -11,6 +11,9 @@
           <md-icon>home</md-icon>
         </router-link>
       </div>
+      <div v-if="currentPathName === 'Review'" class="study-date-count-area">
+        <span class="badge">STUDY {{ studyDateCount }} <small>th</small></span>
+      </div>
       <div class="logout-btn-area">
         <md-button
           class="md-fab md-primary"
@@ -77,6 +80,16 @@ export default {
   position: absolute;
   bottom: 10px;
   left: 0px;
+}
+.study-date-count-area {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  opacity: .8;
+  font-size: 1.5rem;
+  font-weight: 900;
+  background-color: blueviolet;
+  transform: translateX(-50%);
 }
 .logout-btn-area {
   position: absolute;
