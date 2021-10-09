@@ -24,6 +24,12 @@ import { createNamespacedHelpers, mapGetters } from 'vuex'
 import Card from './card/Card.vue'
 import ReviewCardController from './ReviewCardController.vue'
 
+const CARD_RESULT_PRIORITY = { 
+  [REVIEW.FAILURE]: 1,
+  [REVIEW.NONE]: 2,
+  [REVIEW.SUCCESS]: 3,
+}
+
 const userModule = createNamespacedHelpers('user')
 const cardModule = createNamespacedHelpers('card')
 
@@ -121,7 +127,8 @@ export default {
     shuffleCard() {
       this.flipCard('front')
       this.reviewCardList.sort(() => 0.5 - Math.random())
-      this.arrangeCardsOrder()
+      this.arrangeCardsOrderByResult()
+      this.index = 0
     },
     updateCard(result) {
       this.card.lastReviewResult = result
@@ -134,9 +141,16 @@ export default {
         this.$refs.cardComp.flipCard(direction)
       }
     },
+    arrangeCardsOrderByResult() {
+      this.reviewCardList.sort((c1, c2) => CARD_RESULT_PRIORITY[c1.lastReviewResult] - CARD_RESULT_PRIORITY[c2.lastReviewResult])
+    },
     arrangeCardsOrder() {
-      this.reviewCardList.filter(c => c.lastReviewResult === REVIEW.NONE)
-      this.reviewCardList.sort((c1, ) => c1.lastReviewResult === REVIEW.NONE ? -1 : c1.lastReviewResult === REVIEW.FAILURE ? 0 : 1)
+      this.reviewCardList.sort((c1, c2) => {
+        if (c1.lastReviewResult !== c2.lastReviewResult) {
+          return CARD_RESULT_PRIORITY[c1.lastReviewResult] - CARD_RESULT_PRIORITY[c2.lastReviewResult]
+        }
+        return c1.cuid - c2.cuid
+      })
       this.index = 0
     },
     showFrontSide() {

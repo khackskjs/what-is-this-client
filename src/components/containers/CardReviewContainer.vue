@@ -46,10 +46,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.count-space {
-  margin-left: .5rem !important;
-  margin-right: .5rem !important;
-}
-</style>
