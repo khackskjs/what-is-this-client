@@ -11,7 +11,7 @@ export default {
     window.addEventListener('resize', this.onResize)
     this.onResize()
   },
-  destroyed() {
+  beforeDestroy() {
     window.removeEventListener('orientationchange', this.handleOrientationChange)
     window.removeEventListener('resize', this.onResize)
   },
