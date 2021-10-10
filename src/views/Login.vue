@@ -1,21 +1,15 @@
 <template>
-  <div class="d-flex justify-content-center align-items-center vh-100 bg-light">
-    <div
-      v-if="!isLoginFailed"
-      id="my-signin2"
-    />
-    <div v-else>
-      {{ $t('login_failed_title') }}
+  <div class="position-absolute w-100 h-100">
+    <div class="d-flex justify-content-center align-items-center h-100 bg-light">
+      <div
+        v-if="!isLoginFailed"
+        id="my-signin2"
+        class="my-auto"
+      />
+      <div v-else>
+        {{ $t('login_failed_title') }}
+      </div>
     </div>
-    <!-- <form
-      method="GET"
-      action="http://localhost:13135/auth/google"
-    >
-      <input
-        id="google_login_btn"
-        type="submit"
-      >
-    </form> -->
   </div>
 </template>
 
@@ -68,13 +62,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#google_login_btn {
-  background: url("/images/btn_google_signin_dark_normal_web@2x.png") no-repeat;
-  background-size: 100% 100%;
-  cursor: pointer;
-  width: 200px;
-  height: 50px;
-}
 .login-failure-text {
   font-size: 1.5rem;
 }
