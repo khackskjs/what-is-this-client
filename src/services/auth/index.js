@@ -16,7 +16,6 @@ class AuthService {
   }
 
   isAuthenticated() {
-    console.log('isAuthenticated', user.google)
     return !!user.google
   }
 

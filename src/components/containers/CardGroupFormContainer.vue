@@ -12,6 +12,7 @@
       <md-dialog-actions>
         <md-button
           v-if="!isCreateMode"
+          tabindex="10003"
           class="md-accent delete-button"
           @click="deleteGroup"
         >
@@ -19,12 +20,14 @@
         </md-button>
         <md-button
           class="md-primary"
+          tabindex="10002"
           @click="$emit('close'); showDialog = false"
         >
           {{ $t('card_group_form_close_button_title') }}
         </md-button>
         <md-button
           class="md-raised md-primary"
+          tabindex="10001"
           @click="save"
         >
           {{ confirmText }}
@@ -35,6 +38,7 @@
 </template>
 
 <script>
+import EventBus from '@/services/EventBus'
 import CardGroupForms from '@/components/forms/CardGroupForms'
 import { mapGetters, createNamespacedHelpers } from 'vuex'
 import Card from '@/store/models/card.model'
@@ -70,6 +74,13 @@ export default {
     confirmText() {
       return this.isCreateMode ? this.$t('card_group_form_create_button_title') : this.$t('card_group_form_update_button_title')
     },
+  },
+  mounted() {
+    EventBus.$on('review:keyup', (e) => {
+      if (e.code === 'Escape') {
+        this.hide()
+      }
+    })
   },
   methods: {
     ...cardModule.mapActions(['saveCardGroup', 'saveCardList', 'deleteCardGroup']),
