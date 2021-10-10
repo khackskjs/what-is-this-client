@@ -1,19 +1,22 @@
 <template>
-  <div class="card-review-area mx-auto">
-    <card
-      ref="cardComp"
-      :card="card"
-      :index="index"
-      :total="total"
-      :guid-name-map="guidNameMap"
-      :card-height="cardHeight"
-      @touch:card="onCardControl"
-    />
-    <review-card-controller
-      class="mt-1"
-      :review-count="reviewCount"
-      @card-control="onCardControl"
-    />
+  <div>
+    <div class="card-review-area mx-auto">
+      <card
+        ref="cardComp"
+        :class="{ 'card-slide-next': cardSlideDirection === 'next', 'card-slide-prev': cardSlideDirection === 'prev' }"
+        :card="card"
+        :index="index"
+        :total="total"
+        :guid-name-map="guidNameMap"
+        :card-height="cardHeight"
+        @touch:card="onCardControl"
+      />
+      <review-card-controller
+        class="mt-1"
+        :review-count="reviewCount"
+        @card-control="onCardControl"
+      />
+    </div>    
   </div>
 </template>
 
@@ -47,6 +50,7 @@ export default {
     return {
       index: 0,
       cardDirection: 'front',
+      cardSlideDirection: '',
     }
   },
   computed: {
@@ -98,19 +102,36 @@ export default {
         this.showFrontSide()  // 리뷰 결과에 영향을 미치지 않고, 앞면만 보여줍니다.
       }
     })
+    
+    this.$refs.cardComp.$el.addEventListener('animationend', () => this.cardSlideDirection = null)
   },
   beforeDestroy() {
     EventBus.$off('review:keyup')
+    this.$refs.cardComp.$el.remove
   },
   methods: {
     ...cardModule.mapActions(['reviewCard']),
     prevCard() {
-      this.index = this.index === 0 ? 0 : this.index - 1
       this.cardDirection = 'front'
+      if (this.index === 0) {
+        return
+      }
+      this.cardSlideDirection = null
+      setTimeout(() => this.cardSlideDirection = 'prev')
+      setTimeout(() => {
+        this.index = this.index === 0 ? 0 : this.index - 1
+      }, 100)
     },
     nextCard() {
-      this.index = this.index === this.total - 1 ? this.total - 1 : this.index + 1
       this.cardDirection = 'front'
+      if (this.index === this.total -1) {
+        return
+      }
+      this.cardSlideDirection = null
+      setTimeout(() => this.cardSlideDirection = 'next')
+      setTimeout(() => {
+        this.index = this.index === this.total - 1 ? this.total - 1 : this.index + 1
+      }, 100)
     },
     cancelReview() {
       this.updateCard(REVIEW.NONE)
@@ -193,5 +214,55 @@ export default {
 <style lang="scss" scoped>
 .card-review-area {
   max-width: 1280px;
+}
+
+.card-slide-next {
+  animation-duration: .2s;
+  animation-name: slide-next;
+  animation-timing-function: ease-in-out;
+}
+.card-slide-prev {
+  animation-duration: .2s;
+  animation-name: slide-prev;
+  animation-timing-function: ease-in-out;
+}
+
+
+@keyframes slide-prev {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  49% {
+    opacity: 0;
+    transform: translateX(150px);
+  }
+  51% {
+    opacity: 0;
+    transform: translateX(-150px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-next {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  49% {
+    opacity: 0;
+    transform: translateX(-150px);
+  }
+  51% {
+    opacity: 0;
+    transform: translateX(150px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 </style>
