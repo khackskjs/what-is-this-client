@@ -25,7 +25,7 @@
       <div class="md-layout">
         <md-button
           class="md-raised md-primary"
-          :tabindex="model.cardTextList.length * 10 + 3"
+          :tabindex="model.cardTextList.length * 10 + 5"
           @click="addCard"
         >
           {{ $t('card_group_form__card_add_button_title') }}
@@ -40,7 +40,7 @@
       <div
         v-for="(cardText, index) of model.cardTextList"
         :key="index"
-        ref="cardlistComp"
+        ref="cardListComp"
         class="md-layout md-gutter"
       >
         <div class="md-layout-item md-small-size-100">
@@ -50,7 +50,7 @@
               v-model="cardText.text1"
               class="te"
               :required="true"
-              :tabindex="(model.cardTextList.length - index) * 10 + 1"
+              :tabindex="(model.cardTextList.length - index) * 10 + 3"
               :md-counter="values.limit.textareaCount"
               :maxlength="values.limit.textareaCount"
             />
@@ -62,7 +62,7 @@
             <md-textarea
               v-model="cardText.text2"
               :required="true"
-              :tabindex="(model.cardTextList.length - index) * 10 + 2"
+              :tabindex="(model.cardTextList.length - index) * 10 + 4"
               :md-counter="values.limit.textareaCount"
               :maxlength="values.limit.textareaCount"
             />
@@ -70,6 +70,7 @@
         </div>
       </div>
     </div>
+    {{ model.cardTextList }}
   </div>
 </template>
 
@@ -113,12 +114,14 @@ export default {
     },
     addCard() {
       this.model.cardTextList.splice(0, 0, this.createCardText())
-      if (this.$refs.cardlistComp && this.$refs.cardlistComp[0]) {
-        const el = this.$refs.cardlistComp[0].querySelector('textarea')
-        if (el) {
-          el.focus()
+      this.$nextTick(() => {
+        if (this.$refs.cardListComp && this.$refs.cardListComp[0]) {
+          const el = this.$refs.cardListComp[0].querySelector('textarea')
+          if (el) {
+            el.focus()
+          }
         }
-      }
+      })
     },
     deleteCard() {
     }
