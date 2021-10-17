@@ -1,6 +1,7 @@
 <template>
   <div>
     <md-dialog :md-active.sync="showDialog">
+      <md-dialog-title>Card Group</md-dialog-title>
       <card-group-forms
         class="card-group-forms"
         :guid="model.cardGroup.guid"
@@ -120,8 +121,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import 'bootstrap/scss/_functions.scss';
+@import 'bootstrap/scss/_variables.scss';
+@import 'bootstrap/scss/_mixins.scss';
+
 .md-dialog ::v-deep.md-dialog-container {
-  max-width: 768px;
+  min-width: 80%;
+  @include media-breakpoint-down(md) {
+    min-width: 95%;
+  }
+  @include media-breakpoint-down(lg) {
+    min-width: 85%;
+  }
+  @include media-breakpoint-up(xl) {
+    min-width: 60%;
+  }
+  @include media-breakpoint-up(xxl) {
+    min-width: 55%;
+  }
 }
 .card-group-forms {
   overflow-y: auto;

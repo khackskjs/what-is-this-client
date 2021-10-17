@@ -1,12 +1,18 @@
 <template>
   <div class="d-flex flex-wrap">
-    <controller-left class="control-left" />
+    <controller-left
+      class="control-left"
+      @card-control="$emit('card-control', $event)"
+    />
     <controller-center
       class="control-center"
       :review-count="reviewCount"
       @card-control="$emit('card-control', $event)"
     />
-    <controller-right class="control-right" />
+    <controller-right
+      class="control-right"
+      @card-control="$emit('card-control', $event)"
+    />
     <controller-center-for-narrow
       class="control-center-for-narrow"
       @card-control="$emit('card-control', $event)"
@@ -15,7 +21,6 @@
 </template>
 
 <script>
-// import ReviewCardMeta from './ReviewCardMeta.vue'
 import ControllerLeft from './controller/ControllerLeft.vue'
 import ControllerCenter from './controller/ControllerCenter.vue'
 import ControllerCenterForNarrow from './controller/ControllerCenterForNarrow.vue'
@@ -24,7 +29,6 @@ import ControllerRight from './controller/ControllerRight.vue'
 export default {
   name: 'ReviewCardController',
   components: {
-    // ReviewCardMeta,
     ControllerLeft,
     ControllerCenter,
     ControllerRight,

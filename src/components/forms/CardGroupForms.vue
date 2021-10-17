@@ -31,7 +31,8 @@
           {{ $t('card_group_form__card_add_button_title') }}
         </md-button>
         <!-- <md-button
-          class="md-raised md-primary"
+          class="md-access delete-card-btn"
+          tabindex="10004"
           @click="deleteCard"
         >
           {{ $t('card_group_form__card_delete_button_title') }}
@@ -48,7 +49,6 @@
             <label>Front text (Korean)</label>
             <md-textarea
               v-model="cardText.text1"
-              class="te"
               :required="true"
               :tabindex="(model.cardTextList.length - index) * 10 + 3"
               :md-counter="values.limit.textareaCount"
@@ -70,7 +70,6 @@
         </div>
       </div>
     </div>
-    {{ model.cardTextList }}
   </div>
 </template>
 
@@ -124,13 +123,19 @@ export default {
       })
     },
     deleteCard() {
+      // TODO 카드 삭제는 복잡
+      this.model.cardTextList.splice(this.model.cardTextList.length - 1, 1)
     }
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.te {
-  height: 1rem;
+@import 'bootstrap/scss/_functions.scss';
+@import 'bootstrap/scss/_variables.scss';
+@import 'bootstrap/scss/_mixins.scss';
+
+.delete-card-btn {
+  color: var(--md-theme-default-accent-on-background, #64dd17) !important;
 }
 </style>
