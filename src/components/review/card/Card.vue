@@ -14,14 +14,14 @@
           :result="card.lastReviewResult"
         />
         <div class="group-name">
-          {{ guidNameMap[card.guid] }}
+          [{{ guidNameMap[card.guid] }}]
         </div>
         <review-count
           class="count-badge"
           :current="index + 1"
           :total="total"
         />
-        <div>
+        <div class="card-text">
           {{ card.text1 }}
         </div>
         <div class="review-stage-badge">
@@ -37,14 +37,17 @@
           :result="card.lastReviewResult"
         />
         <div class="group-name">
-          {{ guidNameMap[card.guid] }}
+          [{{ guidNameMap[card.guid] }}]
         </div>
         <review-count
           class="count-badge"
           :current="index + 1"
           :total="total"
         />
-        <div v-if="!hiding">
+        <div
+          v-if="!hiding"
+          class="card-text"
+        >
           {{ card.text2 }}
         </div>
         <div class="review-stage-badge">
@@ -110,6 +113,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card-text {
+  position: relative;
+  line-height: 1 !important;
+}
+
 .card {
   border: 0;
   perspective: 150rem;
@@ -178,15 +186,18 @@ export default {
   top: 20px;
 }
 .group-name {
-  font-size: 15px;
+  font-size: 1rem;
+  font-weight: 400;
   position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
   top: 20px;
 }
 .count-badge {
   font-size: 15px;
   position: absolute;
-  right: 20px;
-  top: 20px;
+  right: 10px;
+  top: 40px;
 }
 .review-stage-badge {
   position: absolute;

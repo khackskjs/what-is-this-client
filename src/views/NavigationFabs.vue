@@ -84,12 +84,12 @@ export default {
 .study-date-count-area {
   position: absolute;
   top: 10px;
-  left: 50%;
-  opacity: .8;
-  font-size: 1.5rem;
+  right: 10px;
+  border-radius: 5px;
+  opacity: .7;
+  font-size: 1.3rem;
   font-weight: 900;
   background-color: blueviolet;
-  transform: translateX(-50%);
 }
 .logout-btn-area {
   position: absolute;
