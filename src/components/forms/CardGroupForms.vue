@@ -87,7 +87,7 @@ export default {
       model: {
         groupName: this.groupName,
         baseDate: this.baseDate,
-        cardTextList: this.cardTextList,
+        cardTextList: this.cardTextList.sort((a, b) => a.cuid - b.cuid),
         isInvalid: true,
       },
       values: {
